@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit ProduitSite
+{% endblock %}
+	{% block lesite %} <span class="fa fa-angle-double-right"> </span> Config.  
+						{% endblock %}
+{% block titre %}
+	Modifier produit du site
+{% endblock %}
+{% block lesboutons %}
+	<a  href="{{ path('produit_site_index') }}" type="button" title="Retour à la liste " class="btn btn-info">
+		<i class="fa fa-reply-all"></i>
+	</a>
+	<a  href="{{ path('produit_site_new') }}" type="button" title="Ajouter nouveau " class="btn btn-info">
+		<i class="fas fa-plus-circle"></i>
+	</a>
+	<a  {{ path('produit_site_delete', {'id': produit_site.id}) }}  type="button" title="Supprimer élément" class="btn btn-info">
+		<i class="fas fa-trash"></i>
+	</a>
+{% endblock %}
+{% block body %}
+	{{ include('produit_site/_form.html.twig', {'button_label': 'Update'}) }}
+
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Recherche
+{% endblock %}
+
+{% block titre %}
+	rechercher des bincards
+{% endblock %}
+{% block lesite %}
+	<span class="fa fa-angle-double-right"></span>
+	Bincard
+{% endblock %}
+{% block body %}
+	{{ form_start(form) }}
+	<div class="row">
+		<div class="col-md-6 form-group">
+			{{ form_row(form.produitSite) }}
+		</div>
+		<div class="col-md-6 form-group">
+			{{ form_row(form.mouvement) }}
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6 form-group">
+			{{ form_row(form.dateDebut) }}
+		</div>
+		<div class="col-md-6 form-group">
+			{{ form_row(form.dateFin) }}
+
+		</div>
+	</div>
+	<button class="btn btn-default ">
+		<span class="fa fa-search "></span>
+		{{ button_label|default('Rechercher') }}</button>
+</div>
+{{ form_end(form) }}{% endblock %}

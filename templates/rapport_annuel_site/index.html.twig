@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}RapportAnnuelSite index{% endblock %}
+
+{% block titre %}
+	Tous les raports annuels 
+{% endblock %}
+	{% block lesite %} <span class="fa fa-angle-double-right"> </span> Liste rapports annuels   
+	{% endblock %}
+{% block lesboutons %}
+	<a href="{{ path('rapport_annuel_site_new') }}" title="Ajouter nouveau " class="btn btn-info">
+		<i class="fas fa-plus-circle"></i>
+	</a>
+{% endblock %}
+{% block body %}
+
+	<table id="example1" class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Année</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>#</th>
+                <th>Année</th>
+                <th>actions</th>
+            </tr>
+        </tfoot>
+        <tbody>
+        {% for rapport_annuel_site in rapport_annuel_sites %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>Rapport annuel  {{ rapport_annuel_site.annee }}</td>
+                <td>
+                <div class="btn-group">
+                    <a class="btn btn-default" href="{{ path('rapport_annuel_site_show', {'id': rapport_annuel_site.id}) }}"><span class="fa fa-search-plus "> </span></a>
+                    <a class="btn btn-danger" href="{{ path('suppression_temporaire', {'id': rapport_annuel_site.id}) }}"><span class="fa fa-trash "> </span></a>
+                    {% if not rapport_annuel_site.isCloture  %}
+                    <a class="btn btn-default" href="{{ path('rapport_annuel_site_edit', {'id': rapport_annuel_site.id}) }}"><span class="fa fa-edit "> </span></a>
+                    {% endif %}
+                </div>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

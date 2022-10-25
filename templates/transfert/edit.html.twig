@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Transfert
+{% endblock %}
+	{% block lesite %} <span class="fa fa-angle-double-right"> </span> Transferts  
+						{% endblock %}
+{% block titre %}
+	Modifier transfert
+{% endblock %}
+{% block lesboutons %}
+	<a href="{{ path('transfert_index') }}" title="Retour à la liste " class="btn btn-info">
+		<i class="fa fa-reply-all"></i>
+	</a>
+{% endblock %}
+{% block body %}
+	{{ include('transfert/_form.html.twig', {'button_label': 'Update'}) }}
+{% endblock %}

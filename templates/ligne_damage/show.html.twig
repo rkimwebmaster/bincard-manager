@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}LigneDamage{% endblock %}
+	{% block titre %}
+				Détails des damages du site {{app.user.siteActif}} 
+                 {% endblock %}
+{% block body %}
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Date</th>
+                <td>{{ ligne_damage.date ? ligne_damage.date|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Quantite</th>
+                <td>{{ ligne_damage.quantite }}</td>
+            </tr>
+            <tr>
+                <th>Observation</th>
+                <td>{{ ligne_damage.observation }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('ligne_damage_index') }}">back to list</a>
+
+    <a href="{{ path('ligne_damage_edit', {'id': ligne_damage.id}) }}">edit</a>
+
+    {{ include('ligne_damage/_delete_form.html.twig') }}
+{% endblock %}

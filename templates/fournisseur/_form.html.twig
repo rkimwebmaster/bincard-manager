@@ -1,0 +1,37 @@
+{{ form_start(form) }}
+<div class="row">
+	<div class="col-md-6">
+		<div class="form-group">
+			{{ form_row(form.noms) }}
+		</div>
+	</div>
+	<div class="col-md-6">
+		<div class="form-group">
+			{{ form_row(form.telephone) }}
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-6">
+		<div class="form-group">
+			{{ form_row(form.ville) }}
+		</div>
+	</div>
+	<div class="col-md-6">
+		<div class="form-group">
+			{{ form_row(form.email) }}
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12">
+		<div class="form-group">
+			{{ form_row(form.adresse) }}
+		</div>
+
+	</div>
+</div>
+<button class="btn btn-info">
+	<span class="fa fa-download "></span>
+	{{ button_label|default('Enregistrer') }}</button>
+{{ form_end(form) }}

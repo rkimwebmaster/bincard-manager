@@ -1,0 +1,137 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Entree  liste
+{% endblock %}
+
+{% block titre %}
+	Liste des entrées du
+	{% if app.user.siteActif %}
+		{% if app.user.siteActif.isWarehouse %}warehouse
+			{% else %}site
+		{% endif %}
+	{% endif %}
+	{{app.user.siteActif.designation}}
+{% endblock %}
+{% block lesboutons %}
+	<a href="{{ path('creation_entree') }}" type="button" title="Ajouter nouveau " class="btn btn-info">
+		<i class="fas fa-plus-circle"></i>
+	</a>
+{% endblock %}
+{% block lesite %}
+	<span class="fa fa-angle-double-right"></span>
+	Entrées
+{% endblock %}
+{% block body %}
+
+	{% if type== 'IsReuse' %}
+		<table id="example1" class="table table-bordered table-striped">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Numéro entrée</th>
+					<th>Date</th>
+					<th>actions</th>
+				</tr>
+			</thead>
+			<tfoot>
+				<tr>
+					<th>#</th>
+					<th>Numéro entrée</th>
+					<th>Date</th>
+					<th>actions</th>
+				</tr>
+			</tfoot>
+			<tbody>
+				{% for entree in entrees %}
+					<tr>
+						<td>{{ loop.index }}</td>
+						<td>{{ entree.code }}</td>
+						<td>{{ entree.date ? entree.date|date('d/M/Y') : '' }}</td>
+						<td>
+							<div class="btn-group float-sm-right">
+								<a href="{{ path('entree_show', {'id': entree.id}) }}" class="btn btn-info btn-sm">
+									<i class="fas fa-search-plus "></i>
+								</a>
+								{% if entree.isReuse %}
+									<a href="{{ path('entree_reuse_edit', {'id': entree.id}) }}" class="btn btn-info btn-sm">
+										<i class="fas fa-edit"></i>
+									</a>
+								{% else %}
+									<a href="{{ path('entree_edit', {'id': entree.id}) }}" class="btn btn-info btn-sm">
+										<i class="fas fa-edit"></i>
+									</a>
+								{% endif %}
+
+							</div>
+						</td>
+					</tr>
+				{% else %}
+					<tr>
+						<td colspan="4">aucun enregistrements dans la base</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</tr>
+	</tbody>
+</tbody></table>{% elseif type=='isEntreeSpeciale' %}{% else %}<table id="example1" class="table table-bordered table-striped">
+<thead>
+	<tr>
+		<th>#</th>
+		<th>Numéro entrée
+		</th>
+		<th>Date</th>
+		<th>Type entrée
+		</th>
+		<th>Fournisseur</th>
+		<th>Bon Fournisseur</th>
+		<th>actions</th>
+	</tr>
+</thead>
+<tfoot>
+	<tr>
+		<th>#</th>
+		<th>Numéro entrée
+		</th>
+		<th>Date</th>
+		<th>Type entrée
+		</th>
+		<th>Fournisseur</th>
+		<th>Bon Fournisseur</th>
+		<th>actions</th>
+	</tr>
+</tfoot>
+<tbody>
+	{% for entree in entrees %}
+		<tr>
+			<td>{{ loop.index }}</td>
+			<td>{{ entree.code }}</td>
+			<td>{{ entree.date ? entree.date|date('d/M/Y') : '' }}</td>
+
+			<td>
+				{% if entree.isReuse %}
+					Réuse
+				{% elseif entree.isEntreeSpeciale %}
+					Spéciale
+				{% else %}
+					Fournisseur
+				{% endif %}
+			</td>
+			<td>{{ entree.fournisseur }}</td>
+			<td>{{ entree.numeroBonFournisseur }}</td>
+			<td>
+				<div class="btn-group float-sm-right">
+					<a href="{{ path('entree_show', {'id': entree.id}) }}" class="btn btn-info btn-sm">
+						<i class="fas fa-search-plus "></i>
+					</a>
+					<a href="{{ path('entree_edit', {'id': entree.id,'sup': 1}) }}" class="btn btn-info btn-sm">
+						<i class="fas fa-edit"></i>
+					</a>
+				</div>
+			</td>
+		</tr>
+	{% else %}
+		<tr>
+			<td colspan="7">aucun enregistrements dans la base</td>
+		</tr>
+	{% endfor %}
+</tbody></table>{% endif %}{% endblock %}

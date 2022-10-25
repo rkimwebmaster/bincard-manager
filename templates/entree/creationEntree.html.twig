@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Fournisseur  liste
+{% endblock %}
+{% block titre %}
+	Choisir le fournisseur pour une entrée
+{% endblock %}
+{% block lesboutons %}
+	<a href="{{ path('entree_index') }}" title="Retour à la liste " class="btn btn-info">
+		<i class="fa fa-reply-all"></i>
+	</a>
+{% endblock %}
+{% block lesite %}
+	<span class="fa fa-angle-double-right"></span>
+	Entrées
+{% endblock %}
+{% block body %}
+
+	<table id="example1" class="table table-bordered table-striped">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Fournisseurs
+				</th>
+			</tr>
+		</thead>
+				<tfoot>
+			<tr>
+				<th>#</th>
+				<th>Fournisseurs
+				</th>
+			</tr>
+		</tfoot>
+		<tbody>
+			{% for fournisseur in fournisseurs %}
+				<tr>
+					<td>{{ loop.index }}</td>
+					<td>
+						<a href="{{ path('entree_new', {'id': fournisseur.id}) }}">
+							{{ fournisseur.noms }}
+							--{{ fournisseur.code }}--
+							{{ fournisseur.telephone }}--{{ fournisseur.email }}
+						</a>
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="2">aucun enregistrements dans la base</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+{% endblock %}

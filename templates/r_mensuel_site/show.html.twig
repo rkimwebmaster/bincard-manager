@@ -1,0 +1,105 @@
+{% extends 'base.html.twig' %}
+{% block title %}RMensuelSite
+{% endblock %}
+
+{% block titre %}
+	Détail du rapport du mois de
+	{{r_mensuel_site.designationMois|title}}-
+	{{r_mensuel_site.annee}}
+{% endblock %}
+{% block lesite %}
+	<span class="fa fa-angle-double-right"></span>
+	Rapports
+{% endblock %}
+{% block lesboutons %}
+	<a href="{{ path('r_mensuel_site_new') }}" type="" title="Ajouter nouveau " class="btn btn-info">
+		<i class="fas fa-plus-circle"></i>
+	</a>
+	<a href="{{ path('r_mensuel_site_index') }}" type="" title="Ajouter nouveau " class="btn btn-info">
+		<i class="fas fa-reply-all"></i>
+	</a>
+
+{% endblock %}
+{% block body %}
+	<table id="example1" class="table table-bordered table-striped">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Produit
+				</th>
+				<th>
+					<span class="verticalText" title="vertical text">Initiale</span>
+				</th>
+				<th>Entrée fsseur</th>
+				<th>Entrée spéciale
+				</th>
+				<th>Entrée transfert
+				</th>
+				<th>Entrée reuse</th>
+				<th>Sortie client
+				</th>
+				<th>Sortie speciale
+				</th>
+				<th>Sortie transfert
+				</th>
+
+				<th>Sortie damage
+				</th>
+				<th>Quantité finale
+				</th>
+			</tr>
+		</thead>
+		<tfoot>
+			<tr>
+				<th>#</th>
+				<th>Produit
+				</th>
+				<th>
+					<span class="verticalText" title="vertical text">Initiale</span>
+				</th>
+				<th class="verticalText">Entrée fsseur</th>
+				<th>Entrée spéciale
+				</th>
+				<th class="verticalText">Entrée transfert
+				</th>
+				<th>Entrée reuse</th>
+				<th>Sortie client
+				</th>
+				<th>Sortie speciale
+				</th>
+				<th>Sortie transfert</th>
+				<th>Sortie damage</th>
+				<th>Quantité finale
+				</th>
+			</tr>
+		</tfoot>
+		<tbody>
+			{% for ligne in r_mensuel_site.ligneRMensuels %}
+				<tr>
+					<td>{{ loop.index }}</td>
+					<td>{{ ligne.pn.produit.pn }}</td>
+					<td>{{ ligne.quantiteInitiale }}</td>
+					<td>{{ ligne.quantiteEntree }}</td>
+					<td>{{ ligne.quantiteEntreeSpeciale }}</td>
+					<td>{{ ligne.quantiteEntreeTransfert }}</td>
+					<td>{{ ligne.quantiteEntreeReuse }}</td>
+					<td>{{ ligne.sortieClient }}</td>
+					<td>{{ ligne.sortieSpeciale }}</td>
+					<td>{{ ligne.quantiteSortieTransfert }}</td>
+					<td>{{ ligne.sortieDamage }}</td>
+					<td>{{ ligne.quantiteFinale }}</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	{% if not  r_mensuel_site.isCloture %}
+	<a href="{{ path('r_mensuel_site_clorurer', {'id': r_mensuel_site.id}) }}" class="btn btn-success btn-sm">
+		<i class="fas fa-download"></i> Cloturer rapport
+	</a>
+
+	<a href="{{ path('r_mensuel_site_actualiser', {'id': r_mensuel_site.id}) }}" class="btn btn-success btn-sm">
+		<i class="fas fa-download"></i> Actualiser 
+	</a>
+	{% endif %}
+	{{ include('r_mensuel_site/_delete_form.html.twig') }}
+{% endblock %}

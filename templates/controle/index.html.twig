@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Controle index
+{% endblock %}
+{% block lesite %}
+	<span class="fa fa-angle-double-right"></span>
+	Contrôles
+{% endblock %}
+
+{% block titre %}
+	Liste des controles du site
+	{{app.user.siteActif.designation}}
+{% endblock %}
+
+{% block lesboutons %}
+	<a href="{{ path('controle_index') }}" title="Retour à la liste " class="btn btn-info">
+		<i class="fa fa-reply-all"></i>
+	</a>
+	<a href="{{ path('controle_new') }}" title="Nouveau contrôle " class="btn btn-info">
+		<i class="fa fa-plus"></i>
+	</a>
+{% endblock %}
+{% block body %}
+
+	<table id="example1" class="table table-bordered table-striped">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Date</th>
+				<th>Etat</th>
+				<th>Observation Finale</th>
+				<th>actions</th>
+			</tr>
+		</thead>
+				<tfoot>
+			<tr>
+				<th>#</th>
+				<th>Date</th>
+				<th>Etat</th>
+				<th>Observation Finale</th>
+				<th>actions</th>
+			</tr>
+		</tfoot>
+		<tbody>
+			{% for controle in controles %}
+				<tr>
+					<td>{{ loop.index }}</td>
+					<td>{{ controle.date ? controle.date|date('d/M/Y') : '' }}</td>
+					<td>
+						{% if controle.isValidee %}
+							<i class="fas fa-check-circle text-success"></i>
+						{% else %}
+							<i class="fa fa-times text-danger"></i>
+						{% endif %}
+					</td>
+					<td>{{ controle.observationFinale }}</td>
+					<td>
+						<div class="btn-group float-sm-right">
+							<a href="{{ path('controle_show', {'id': controle.id}) }}" class="btn btn-info">
+								<i class="fas fa-search-plus "></i>
+							</a>
+							{% if not controle.isValidee %}
+								<a href="{{ path('controle_edit', {'id': controle.id}) }}" class="btn btn-info">
+									<i class="fas fa-edit"></i>
+								</a>
+							{% endif %}
+
+						</div>
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="5">aucun enregistrement</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+{% endblock %}

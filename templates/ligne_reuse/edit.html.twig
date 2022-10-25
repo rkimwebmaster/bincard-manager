@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit LigneReuse{% endblock %}
+
+{% block body %}
+    <h1>Edit LigneReuse</h1>
+
+    {{ include('ligne_reuse/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('ligne_reuse_index') }}">back to list</a>
+
+    {{ include('ligne_reuse/_delete_form.html.twig') }}
+{% endblock %}

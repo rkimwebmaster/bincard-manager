@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ProduitSite  liste
+{% endblock %}
+{% block titre %}
+	Choisir un produit a sortir de stock
+{% endblock %}
+
+{% block body %}
+
+	<table id="example1" class="table table-bordered table-striped">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Produit du site
+				</th>
+				<th>Stock
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for produit in produits %}
+				<tr {% if produit.isDangerStock %} class="text-danger" title="danger de stock" {% endif %}>
+					<td>{{ loop.index }}</td>
+					<td>
+						<a href="{{ path('nouveau_damage', {'id': produit.id}) }}">
+							{{ produit.produit.pn }}
+							{{ produit.produit.description }}
+						</a>
+					</td>
+					<td>{{ produit.quantite }}</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="7">aucun enregistrements dans la base</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+
+{% endblock %}

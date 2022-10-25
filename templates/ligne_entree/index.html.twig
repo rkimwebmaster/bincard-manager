@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}LigneEntree index{% endblock %}
+{% block titre %}
+				Liste des détails  entrées 
+                	{% endblock %}
+{% block body %}
+<table id="example1" class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Produit</th>
+                <th>Quantite</th>
+                <th>Description</th>
+                <th>Observation</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for ligne_entree in ligne_entrees %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ ligne_entree.produit }}</td>
+                <td>{{ ligne_entree.produit.quantite }}</td>
+                <td>{{ ligne_entree.produit.description }}</td>
+                <td>{{ ligne_entree.produit.observation }}</td>
+                <td>
+                    <a href="{{ path('ligne_entree_show', {'id': ligne_entree.id}) }}">voir</a>
+                    <a href="{{ path('ligne_entree_edit', {'id': ligne_entree.id}) }}">modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">aucun enregistrement</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

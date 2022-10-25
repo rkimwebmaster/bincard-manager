@@ -1,0 +1,110 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sortie 
+{% endblock %}
+
+{% block titre %}
+	Détail de la sortie 
+{% endblock %}
+	{% block lesite %} <span class="fa fa-angle-double-right"> </span> Sortie  
+						{% endblock %}
+   {% block lesboutons %}
+	<a  href="{{ path('sortie_index') }}" title="Retour à la liste " class="btn btn-info">
+		<i class="fa fa-reply-all"></i>
+	</a>
+{% endblock %}
+{% block body %}
+	<!-- Main content -->
+	<div
+		class="invoice p-3 mb-3">
+		<!-- title row -->
+		<div class="row">
+			<div class="col-12">
+				<h4>
+					<i class="fas fa-subway text-danger"></i>
+					Bill<span class="text-danger">C</span>ard Manager Stock.
+					<small class="float-right">Date:
+						{{sortie.date|date('d/M/Y')}}</small>
+				</h4>
+			</div>
+			<!-- /.col -->
+		</div>
+		<!-- info row -->
+		<div class="row invoice-info">
+			<div class="col-sm-4 invoice-col">
+				Site envoie 
+				<address>
+					<strong>{{sortie.siteEnvoie}}</strong><br>
+					Adresse: {{sortie.siteEnvoie.adresse}}<br>
+					Ville: {{sortie.siteEnvoie.ville}}<br>
+					Phone: {{sortie.siteEnvoie.telephone}}<br>
+					Email: {{sortie.siteEnvoie.email}}
+				</address>
+			</div>
+			<!-- /.col -->
+			<div class="col-sm-4 invoice-col">
+				Client 
+				<address>
+					<strong>{{sortie.client}}</strong><br>
+					Adresse: {% if sortie.client %} {{sortie.client.email}} {% endif %}<br>
+					Ville: <br>
+					Phone: {% if sortie.client %}{{sortie.client.telephone}} {% endif %} <br>
+					Email: {% if sortie.client %} {{sortie.client.email}}{% endif %}
+				</address>
+			</div>
+			<!-- /.col -->
+			<div class="col-sm-4 invoice-col">
+				<b>Sortie #{{sortie.code}}</b><br>
+				<br>
+				<b>Code dépot:</b>
+				{{sortie.iddNumber}}<br>
+				<b>Machine # :</b>
+				{{sortie.machineNumber}}
+			</div>
+			<!-- /.col -->
+		</div>
+		<!-- /.row -->
+
+		<!-- Table row -->
+		<div class="row">
+			<div class="col-12 table-responsive">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>Product No</th>
+							<th>Qty</th>
+						</tr>
+					</thead>
+					<tbody>
+
+						{% for ligne in sortie.ligneSorties %}
+							<tr>
+								<td>{{ligne.produitSite.produit.pn}}</td>
+								<td>{{ligne.quantite}}</td>
+							</tr>
+						{% endfor %}
+
+					</tbody>
+				</table>
+			</div>
+			<!-- /.col -->
+		</div>
+		<!-- /.row -->
+
+		<!-- this row will not appear when printing -->
+		<div class="row no-print">
+			<div class="col-12">
+				<a onClick="window.print()" rel="noopener" target="_blank" class="btn btn-default">
+					<i class="fas fa-print"></i>
+					Imprimer</a>
+				<a  href="{{ path('sortie_edit', {'id': sortie.id}) }}" class="btn btn-success float-right">
+					<i class="far fa-credit-card"></i>
+					Modifier
+				</a>
+			
+    {{ include('sortie/_delete_form.html.twig') }}
+				
+			</div>
+		</div>
+	</div>
+{% endblock %}

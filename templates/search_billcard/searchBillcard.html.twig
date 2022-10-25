@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New ProduitSite
+{% endblock %}
+
+{% block titre %}
+	rechercher des billcards
+{% endblock %}
+{% block lesite %}
+	<span class="fa fa-angle-double-right"></span>
+	Billcard
+{% endblock %}
+{% block body %}
+	{{ form_start(form) }}
+	{{ form_widget(form) }}
+	<button class="btn btn-default ">
+		<span class="fa fa-search "></span>
+		{{ button_label|default('Rechercher') }}</button>
+	{{ form_end(form) }}
+{% endblock %}

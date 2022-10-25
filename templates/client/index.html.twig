@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Client  liste
+{% endblock %}
+{% block titre %}
+	Liste des clients
+{% endblock %}
+	{% block lesite %} <span class="fa fa-angle-double-right"> </span> Config.   
+						{% endblock %}
+{% block lesboutons %}
+	<a href="{{ path('client_new') }}" type="button" title="Ajouter nouveau " class="btn btn-info">
+		<i class="fas fa-plus-circle"></i>
+	</a>
+{% endblock %}
+{% block body %}
+	<table id="example1" class="table table-bordered table-striped">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Noms</th>
+				<th>Téléphone</th>
+				<th>Code</th>
+				<th>actions</th>
+			</tr>
+		</thead>
+				<tfoot>
+			<tr>
+				<th>#</th>
+				<th>Noms</th>
+				<th>Téléphone</th>
+				<th>Code</th>
+				<th>actions</th>
+			</tr>
+		</tfoot>
+		<tbody>
+			{% for client in clients %}
+				<tr>
+					<td>{{ loop.index }}</td>
+					<td>{{ client.noms }}
+
+						{% if client.isSite %}
+							<span title="ce client est un site/warehouse" class="fa fa-tags"></span>
+						{% endif %}
+
+					</td>
+					<td>{{ client.telephone }}</td>
+					<td>{{ client.code }}</td>
+					<td>
+						<div class="btn-group float-sm-right">
+							<a href="{{ path('client_show', {'id': client.id}) }}" title="Ajouter nouveau " class="btn btn-info">
+								<i class="fas fa-search-plus "></i>
+							</a>
+							<a href="{{ path('client_edit', {'id': client.id}) }}" title="Modifier élément  " class="btn btn-info">
+								<i class="fas fa-edit"></i>
+							</a>
+						</div>
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="5">aucun enregistrements dans la base</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+{% endblock %}

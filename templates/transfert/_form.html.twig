@@ -1,0 +1,32 @@
+{{ form_start(form) }}
+
+{{ form_label(form.date) }}
+{{ form_widget(form.date) }}
+{{ form_errors(form.date) }}
+
+
+{{ form_label(form.code) }}
+{{ form_widget(form.code) }}
+{{ form_errors(form.code) }}
+
+<h3>Les détails des transfert
+</h3>
+<ul class="tags list-inline" data-prototype="{{ form_widget(form.ligneTransferts.vars.prototype)|e('html_attr') }}">
+	{% for ligneTransfert in form.ligneTransferts   %}
+		<tr>
+			<td>{{ form_row(ligneTransfert.produitSite)}}
+			</td>
+			<td>
+				{{ form_row(ligneTransfert.quantite)}}
+			</td>
+			{# <td>
+						{{ form_row(ligneTransfert.observation)}}
+						</td> #}
+		</tr>
+	{% endfor %}
+</ul>
+<br/>
+<button class="btn btn-info">
+	<span class="fa fa-download "></span>
+	{{ button_label|default('Enregistrer') }}</button>
+{{ form_end(form) }}

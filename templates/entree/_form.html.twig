@@ -1,0 +1,29 @@
+{{ form_start(form) }}
+<div class="row">
+	<div class="col-md-4">
+		<div class="form-group">
+			{{ form_row(form.date) }}
+		</div>
+	</div>
+	<div class="col-md-4">
+		<div class="form-group">
+			{{ form_row(form.numeroBonFournisseur) }}
+		</div>
+	</div>
+</div>
+
+<h3>Les détails des entr&eacute;es </h3>
+	<ul class="tags list-inline" data-prototype="{{ form_widget(form.ligneEntrees.vars.prototype)|e('html_attr') }}">
+	{% for ligneEntree in form.ligneEntrees   %}
+		<li>
+			{{ form_row(ligneEntree.produit, {label_attr: {class: 'select2'}})}}
+			{{ form_row(ligneEntree.quantite)}}
+			{{ form_row(ligneEntree.observation)}}
+			</li>
+	{% endfor %}
+	</ul>
+	<br />
+    <button class="btn btn-info">  
+    <span class="fa fa-download "> </span>
+    {{ button_label|default('Enregistrer') }}</button>
+	{{ form_end(form) }}

@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Depot  liste {% endblock %}
+
+		{% block titre %}
+				Liste des dépots     <a href="{{ path('depot_new') }}">Créer nouveau</a>
+				{% endblock %}
+{% block body %}
+
+<table id="example1" class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Designation</th>
+                <th>Code</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for depot in depots %}
+            <tr>
+                <td>{{ depot.id }}</td>
+                <td>{{ depot.designation }}</td>
+                <td>{{ depot.code }}</td>
+                <td>
+                    <a href="{{ path('depot_show', {'id': depot.id}) }}">voir</a>
+                    <a href="{{ path('depot_edit', {'id': depot.id}) }}">modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">aucun enregistrements dans la base</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

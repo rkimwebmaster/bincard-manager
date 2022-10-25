@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Site  liste
+{% endblock %}
+
+{% block titre %}
+	Liste des sites
+{% endblock %}
+	{% block lesite %} <span class="fa fa-angle-double-right"> </span> Config.  
+						{% endblock %}
+{% block lesboutons %}
+	<a href="{{ path('site_new') }}" title="Ajouter nouveau " class="btn btn-info">
+		<i class="fas fa-plus-circle"></i>
+	</a>
+{% endblock %}
+{% block body %}
+
+	<table id="example1" class="table table-bordered table-striped">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Désignation</th>
+				<th>Code</th>
+				<th>Type de site </th>
+				<th>adresse</th>
+				<th>actions</th>
+			</tr>
+		</thead>
+				<tfoot>
+			<tr>
+				<th>#</th>
+				<th>Désignation</th>
+				<th>Code</th>
+				<th>Type de site </th>
+				<th>adresse</th>
+				<th>actions</th>
+			</tr>
+		</tfoot>
+		<tbody>
+			{% for site in sites %}
+				<tr>
+					<td>{{ loop.index }}</td>
+					<td>{{ site.designation }}
+						{% if app.user %}
+							{% if app.user.siteActif %} <span class="fa fa-angle-double-right"> </span>
+								{{app.user.siteActif.designation }}
+								{% if app.user.siteActif.isWarehouse %}
+									<span title="ce site est un warehouse" class="fa fa-tags"></span>
+								{% endif %}
+							{% endif %}
+						{% endif %}
+					</td>
+					<td>{{ site.code }}</td>
+					<td>{% if site.isWarehouse %}
+					warehouse
+					{% else %}
+					site 
+					{% endif %}
+					</td>
+					<td>{{ site.adresse }}</td>
+					<td>
+						<a href="{{ path('site_show', {'id': site.id}) }}">voir</a>
+						<a href="{{ path('site_edit', {'id': site.id}) }}">modifier</a>
+						<a href="{{ path('transfert_new', {'id': site.id}) }}">transferer</a>
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="6">aucun enregistrements dans la base</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+{% endblock %}

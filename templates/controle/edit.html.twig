@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier Controle
+{% endblock %}
+{% block titre %}
+	Modifier le controle
+{% endblock %}
+{% block lesite %}
+	<span class="fa fa-angle-double-right"></span>
+	Contrôles
+{% endblock %}
+{% block lesboutons %}
+	<a href="{{ path('controle_index') }}" title="Retour à la liste " class="btn btn-info">
+		<i class="fa fa-reply-all"></i>
+	</a>
+	<a href="{{ path('controle_new') }}" title="Ajouter nouveau " class="btn btn-info">
+		<i class="fas fa-plus-circle"></i>
+	</a>
+{% endblock %}
+{% block body %}
+	{{ include('controle/_form.html.twig', {'button_label': 'Update'}) }}
+
+	{{ include('controle/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Transfert  liste
+{% endblock %}
+{% block titre %}
+	Liste des transfers récus 
+{% endblock %}
+	{% block lesite %} <span class="fa fa-angle-double-right"> </span> Transferts  
+						{% endblock %}
+   {% block lesboutons %}
+	<a  href="{{ path('transfert_index') }}" title="Retour à la liste " class="btn btn-info">
+		<i class="fa fa-reply-all"></i>
+	</a>
+{% endblock %}
+{% block body %}
+	<table id="example1" class="table table-bordered table-striped">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Date</th>
+				<th>Site envoie
+				</th>
+				<th>Site reception</th>
+				<th>Etat
+				</th>
+				<th>actions</th>
+			</tr>
+		</thead>
+				<tfoot>
+			<tr>
+				<th>#</th>
+				<th>Date</th>
+				<th>Site envoie
+				</th>
+				<th>Site reception</th>
+				<th>Etat
+				</th>
+				<th>actions</th>
+			</tr>
+		</tfoot>
+		<tbody>
+			{% for transfert in transferts %}
+				<tr>
+					<td>{{ loop.index }}</td>
+					<td>{{ transfert.date ? transfert.date|date('d/M/Y') : '' }}</td>
+					<td>{{ transfert.siteEnvoie }}</td>
+					<td>{{ transfert.siteReception }}</td>
+					<td>
+						{% if transfert.isValidee %}
+							<i class="fas fa-check-circle text-success"></i>
+						{% else %}
+							<i class="fa fa-times text-danger"></i>
+						{% endif %}					
+					</td>
+					<td>
+						<a href="{{ path('transfert_show', {'id': transfert.id}) }}">voir</a>
+						{% if transfert.siteEnvoie == app.user.siteActif  %}
+							{% if not  transfert.isValidee  %}
+								<a href="{{ path('transfert_edit', {'id': transfert.id}) }}">modifier</a>
+							{% endif %}
+						{% endif %}
+						{% if not  transfert.isValidee  %}
+							{% if transfert.siteReception == app.user.siteActif  %}
+								<a href="{{ path('transfert_valider', {'id': transfert.id}) }}">valider</a>
+							{% endif %}
+						{% endif %}
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="6">aucun enregistrements dans la base</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+{% endblock %}

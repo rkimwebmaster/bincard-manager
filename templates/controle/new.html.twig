@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Controle
+{% endblock %}
+{% block titre %}
+	Nouveau controle
+{% endblock %}
+{% block lesite %}
+	<span class="fa fa-angle-double-right"></span>
+	Contrôles
+{% endblock %}
+{% block lesboutons %}
+	<a href="{{ path('controle_index') }}" title="Retour à la liste " class="btn btn-info">
+		<i class="fa fa-reply-all"></i>
+	</a>
+{% endblock %}
+{% block body %}
+	{{ include('controle/_form.html.twig') }}
+{% endblock %}

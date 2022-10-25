@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Depot{% endblock %}
+
+		{% block titre %}
+				Détail dépot 
+				{% endblock %}
+{% block body %}
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Désignation</th>
+                <td>{{ depot.designation }}</td>
+            </tr>
+            <tr>
+                <th>Code</th>
+                <td>{{ depot.code }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('depot_index') }}">retour à la liste </a>
+
+    <a href="{{ path('depot_edit', {'id': depot.id}) }}">modifier</a>
+
+    {{ include('depot/_delete_form.html.twig') }}
+{% endblock %}

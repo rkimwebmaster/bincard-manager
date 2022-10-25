@@ -1,0 +1,80 @@
+
+{% extends 'base.html.twig' %}
+{% block title %}Rapport annuel génnéral
+{% endblock %}
+
+{% block titre %}
+	Détail du rapport annuel générale de l'année
+	{{r_annuel_general.annee}}
+{% endblock %}
+{% block lesite %}
+	<span class="fa fa-angle-double-right"></span>
+	Rapports
+{% endblock %}
+{% block lesboutons %}
+	<a href="{{ path('r_annuel_general_new') }}" type="" title="Ajouter nouveau " class="btn btn-info">
+		<i class="fas fa-plus-circle"></i>
+	</a>
+	<a href="{{ path('r_annuel_general_index') }}" type="" title="Ajouter nouveau " class="btn btn-info">
+		<i class="fas fa-reply-all"></i>
+	</a>
+
+{% endblock %}
+{% block body %}
+	<table id="example1" class="table table-bordered table-striped">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Produit	</th>
+				<th>Initiale</th>
+				<th >Entrée fsseur</th>
+				<th>Entrée reuse</th>
+				<th>Sortie client</th>
+				<th>Sortie damage</th>
+				<th>Entrée spéciale</th>
+				<th>Sortie speciale	</th>
+				<th>Solde </th>
+			</tr>
+		</thead>
+		<tfoot>
+			<tr>
+				<th>#</th>
+				<th>Produit	</th>
+				<th>Initiale</th>
+				<th >Entrée fsseur</th>
+				<th>Entrée reuse</th>
+				<th>Sortie client</th>
+				<th>Sortie damage</th>
+				<th>Entrée spéciale</th>
+				<th>Sortie speciale	</th>
+				<th>Solde </th>
+			</tr>
+		</tfoot>
+		<tbody>
+			{% for ligne in r_annuel_general.ligneRAnnuelGenerals %}
+				<tr>
+					<td>{{ loop.index }}</td>
+					<td>{{ ligne.pn }}</td>
+					<td>{{ ligne.qteInitiale }}</td>
+					<td>{{ ligne.qteEntreeFournisseur }}</td>
+					<td>{{ ligne.qteEntreeReuse }}</td>
+					<td>{{ ligne.qteSortieClient }}</td>
+					<td>{{ ligne.qteSortieDamage }}</td>
+					<td>{{ ligne.qteEntreeSpeciale }}</td>
+					<td>{{ ligne.qteSortieSpeciale }}</td>
+					<td>{{ ligne.qteSolde }}</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	{# {% if not  r_annuel_general.isCloture %} #}
+	<a href="{#{ path('r_annuel_general_clorurer', {'id': r_annuel_general.id}) }#}" class="btn btn-success btn-sm">
+		<i class="fas fa-download"></i> Cloturer rapport
+	</a>
+
+	<a href="{#{ path('r_annuel_general_actualiser', {'id': r_annuel_general.id}) }#}" class="btn btn-success btn-sm">
+		<i class="fas fa-download"></i> Actualiser 
+	</a>
+	{# {% endif %} #}
+	{{ include('r_annuel_general/_delete_form.html.twig') }}
+{% endblock %}

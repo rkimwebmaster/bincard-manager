@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Stock control card {% endblock %}
+
+
+{% block titre %}
+	Stock control card  Type /part No : <span class="text-warning">
+	 {{produitSite.produit.pn}}
+	en {{mouvement}}
+	</span>
+{% endblock %}
+{% block lesite %}
+	<span class="fa fa-angle-double-right"></span>
+	Bincard
+{% endblock %}
+{% block body %}
+
+	<table id="example1" class="table table-bordered table-striped">
+		<thead>
+			<tr>
+				<th>Date</th>
+				<th> Order / Machine #</th>
+				<th>Delivery Note #</th>
+				<th>Qty Received</th>
+				<th>Supplier</th>
+				<th>Customer</th>
+				<th>Ijd #</th>
+				<th>Qty Sold</th>
+				<th>Total Balance</th>
+			</tr>
+		</thead>
+				<tfoot>
+			<tr>
+				<th>Date</th>
+				<th> Order / Machine #</th>
+				<th>Delivery Note #</th>
+				<th>Qty Received</th>
+				<th>Supplier</th>
+				<th>Customer</th>
+				<th>Ijd #</th>
+				<th>Qty Sold</th>
+				<th>Total Balance</th>
+			</tr>
+
+		</tfoot>
+		<tbody>
+			{% for ligne_billcard in ligne_billcards %}
+				<tr>
+					<td>{{ ligne_billcard.date ? ligne_billcard.date|date('d/M/Y') : '' }}</td>
+					<td>{{ ligne_billcard.machineNumber }}</td>
+					<td>{{ ligne_billcard.deliveryNoteNumber }}</td>
+					<td>
+						{% if ligne_billcard.quantityReceived ==0  %}
+							{% else %}
+								{{ ligne_billcard.quantityReceived }}
+						{% endif %}
+					</td>
+					<td>{{ ligne_billcard.supplier }}</td>
+					<td>{{ ligne_billcard.customer }}</td>
+					<td>{{ ligne_billcard.ijdNumber }}</td>
+					<td>
+						{% if ligne_billcard.quantitySold ==0  %}
+							{% else %}
+								{{ ligne_billcard.quantitySold }}
+						{% endif %}
+					</td>
+					<td>{{ ligne_billcard.totalBalance }}</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="9">aucun enregistrement dans la base
+					</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+{% endblock %}

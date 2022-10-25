@@ -1,0 +1,29 @@
+
+
+{% extends 'base.html.twig' %}
+
+{% block title %}New RMensuelSite{% endblock %}
+
+{% block body %}
+{{ form_start(form) }}
+<div class="row">
+	<div class="col-md-6">
+		<div class="form-group">
+			{{ form_row(form.mois) }}
+		</div>
+	</div>
+	<div class="col-md-6">
+		<div class="form-group">
+			{{ form_row(form.annee) }}
+		</div>
+	</div>
+</div>
+    {{ form_widget(form) }}
+    <button class="btn btn-default">
+    <span class="fa fa-search-plus"></span>
+    {{ button_label|default('rechercher rapport') }}</button>
+{{ form_end(form) }}
+
+    {# <a href="{{ path('r_mensuel_site_index') }}">back to list</a> #}
+{% endblock %}
+

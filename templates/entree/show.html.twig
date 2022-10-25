@@ -1,0 +1,135 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Entree
+{% endblock %}
+
+{% block titre %}
+	Détail de l'entrée
+{% endblock %}
+{% block lesite %}
+	<span class="fa fa-angle-double-right"></span>
+	Entrées
+{% endblock %}
+{% block lesboutons %}
+	<a href="{{ path('entree_index') }}" title="Retour à la liste " class="btn btn-info">
+		<i class="fa fa-reply-all"></i>
+	</a>
+{% endblock %}
+{% block body %}
+	<!-- Main content -->
+	<div
+		class="invoice p-3 mb-3">
+		<!-- title row -->
+		<div class="row">
+			<div class="col-12">
+				<h4>
+					<i class="fas fa-subway text-danger"></i>
+					Bill<span class="text-danger">C</span>ard Manager Stock.
+					<small class="float-right">Date:
+						{{entree.date|date('d/M/Y')}}</small>
+				</h4>
+			</div>
+			<!-- /.col -->
+		</div>
+		<!-- info row -->
+		<div class="row invoice-info">
+			<div class="col-sm-4 invoice-col">
+				{%if entree.fournisseur%}
+					Fournisseur
+					<address>
+						<strong>{{entree.fournisseur}}</strong><br>
+						Adresse:
+						{{entree.fournisseur.adresse}}<br>
+						Ville:
+						{{entree.fournisseur.ville}}<br>
+						Phone:
+						{{entree.fournisseur.telephone}}<br>
+						Email:
+						{{entree.fournisseur.email}}
+					</address>
+				{% endif %}
+			</div>
+			<!-- /.col -->
+			<div class="col-sm-4 invoice-col">
+				WareHouse
+				<address>
+					<strong>{{entree.siteReception}}</strong><br>
+					Adresse:
+					{{entree.siteReception.email}}<br>
+					Ville:
+					<br>
+					Phone:
+					{{entree.siteReception.telephone}}<br>
+					Email:
+					{{entree.siteReception.email}}
+				</address>
+			</div>
+			<!-- /.col -->
+			<div class="col-sm-4 invoice-col">
+				<b>Entrée #{{entree.code}}</b><br>
+				<br>
+					<b></b>
+					{#{entree.siteReception.code}}<br>
+												{%if entree.fournisseur%}
+									<b>Code fournisseur :</b>
+									{{entree.fournisseur.code}}
+									{% endif %#}
+				</div>
+				<!-- /.col -->
+			</div>
+			<!-- /.row -->
+
+			<!-- Table row -->
+			<div class="row">
+				<div class="col-12 table-responsive">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>Product No</th>
+								<th>Qty</th>
+								<th>Description
+								</th>
+								<th>Observation</th>
+							</tr>
+						</thead>
+						<tbody>
+
+							{% for ligne in entree.ligneEntrees %}
+								<tr>
+									<td>{{ligne.produit.pn}}</td>
+									<td>{{ligne.quantite}}</td>
+									<td>{{ligne.produit.description}}</td>
+									<td>{{ligne.observation}}
+									</td>
+								</tr>
+							{% endfor %}
+
+						</tbody>
+					</table>
+				</div>
+				<!-- /.col -->
+			</div>
+			<!-- /.row -->
+
+			<!-- this row will not appear when printing -->
+			<div class="row no-print">
+				<div class="col-12">
+					<a onclick="window.print()" rel="noopener" target="_blank" class="btn btn-default">
+						<i class="fas fa-print"></i>
+						Imprimer</a>
+					{% if entree.isReuse %}
+						<a href="{{ path('entree_reuse_edit', {'id': entree.id}) }}" class="btn btn-info ">
+							<i class="fas fa-edit"></i>Modifier
+						</a>
+					{% else %}
+						<a href="{{ path('entree_edit', {'id': entree.id,'sup': 1}) }}" class="btn btn-info ">
+							<i class="fas fa-edit"></i>Modifier
+						</a>
+					{% endif %}
+					<a style="margin-right: 15px;">
+						{{ include('entree/_delete_form.html.twig') }}
+					</a>
+				</div>
+			</div>
+		</div>
+	{% endblock %}

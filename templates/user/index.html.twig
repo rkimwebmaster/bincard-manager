@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des utilisateurs
+{% endblock %}
+{% block titre %}
+	Liste des utilisateurs
+{% endblock %}
+{% block lesite %}
+	<span class="fa fa-angle-double-right"></span>
+	Profile
+{% endblock %}
+{% block lesboutons %}
+	<a href="{{ path('app_register') }}" title="Ajouter nouveau " class="btn btn-info">
+		<i class="fas fa-plus-circle"></i>
+	</a>
+{% endblock %}
+{% block body %}
+	<table id="example1" class="table table-bordered table-striped">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th title="username ">Nom utilisateur
+				</th>
+				<th>Site/Warehouse autorisés
+				</th>
+				<th>actions</th>
+			</tr>
+		</thead>
+				<tfoot>
+			<tr>
+				<th>#</th>
+				<th title="username ">Nom utilisateur
+				</th>
+				<th>Site/Warehouse autorisés
+				</th>
+				<th>actions</th>
+			</tr>
+		</tfoot>
+		<tbody>
+			{% set continue = false %}
+			{% for user in users %}
+				{% if user == app.user %}
+					{% set continue = true %}
+				{% endif %}
+				{% if not continue %}
+					<tr>
+						<td>{{ loop.index }}</td>
+						<td>{{ user.username }}</td>
+						<td>
+							{% for site  in user.siteGeres  %}
+								{{loop.index}})
+								{{site}}
+								--
+							{% endfor %}
+						</td>
+						<td>
+							<div class="btn-group float-sm-right">
+								<a href="{{ path('user_show', {'id': user.id}) }}" title="Voir élément  " class="btn btn-info">
+									<i class="fas fa-search-plus "></i>
+								</a>
+								<a href="{{ path('user_edit', {'id': user.id}) }}" title="Modifier élément" class="btn btn-info">
+									<i class="fas fa-edit"></i>
+								</a>
+							</div>
+						</td>
+					</tr>
+				{% endif %}
+				{% if continue %}
+					{% set continue = false %}
+				{% endif %}
+			{% else %}
+				<tr>
+					<td colspan="4">aucun enregistrements dans la base</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+{% endblock %}

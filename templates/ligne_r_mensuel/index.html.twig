@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}LigneRMensuel index{% endblock %}
+
+{% block body %}
+    <h1>LigneRMensuel index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>QuantiteInitiale</th>
+                <th>QuantiteEntree</th>
+                <th>QuantiteEntreeSpeciale</th>
+                <th>QuantiteEntreeTransfert</th>
+                <th>QuantiteEntreeReuse</th>
+                <th>SortieClient</th>
+                <th>SortieSpeciale</th>
+                <th>QuantiteSortieTransfert</th>
+                <th>QuantiteFinale</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for ligne_r_mensuel in ligne_r_mensuels %}
+            <tr>
+                <td>{{ ligne_r_mensuel.id }}</td>
+                <td>{{ ligne_r_mensuel.quantiteInitiale }}</td>
+                <td>{{ ligne_r_mensuel.quantiteEntree }}</td>
+                <td>{{ ligne_r_mensuel.quantiteEntreeSpeciale }}</td>
+                <td>{{ ligne_r_mensuel.quantiteEntreeTransfert }}</td>
+                <td>{{ ligne_r_mensuel.quantiteEntreeReuse }}</td>
+                <td>{{ ligne_r_mensuel.sortieClient }}</td>
+                <td>{{ ligne_r_mensuel.sortieSpeciale }}</td>
+                <td>{{ ligne_r_mensuel.quantiteSortieTransfert }}</td>
+                <td>{{ ligne_r_mensuel.quantiteFinale }}</td>
+                <td>
+                    <a href="{{ path('ligne_r_mensuel_show', {'id': ligne_r_mensuel.id}) }}">show</a>
+                    <a href="{{ path('ligne_r_mensuel_edit', {'id': ligne_r_mensuel.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="11">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('ligne_r_mensuel_new') }}">Create new</a>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Site{% endblock %}
+	{% block lesite %} <span class="fa fa-angle-double-right"> </span> Config.  
+						{% endblock %}
+	{% block titre %}
+				Détails de site
+				{% endblock %}
+                     {% block lesboutons %}
+	<a  href="{{ path('site_index') }}" title="Retour à la liste " class="btn btn-info">
+		<i class="fa fa-reply-all"></i>
+	</a>
+{% endblock %}
+{% block body %}
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>#</th>
+                <td>{{ site.id }}</td>
+            </tr>
+            <tr>
+                <th>Designation</th>
+                <td>{{ site.designation }}</td>
+            </tr>
+            <tr>
+                <th>Code</th>
+                <td>{{ site.code }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('site_index') }}">retour à la liste </a>
+
+    <a href="{{ path('site_edit', {'id': site.id}) }}">modifier</a>
+
+    {{ include('site/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit LigneDamage{% endblock %}
+	{% block titre %}
+				Modifier un damage du site {{app.user.siteActif}} 
+                 {% endblock %}
+{% block body %}
+    {{ include('ligne_damage/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('ligne_damage_index') }}">back to list</a>
+
+    {{ include('ligne_damage/_delete_form.html.twig') }}
+{% endblock %}

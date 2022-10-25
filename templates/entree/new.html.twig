@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Entree
+{% endblock %}
+	{% block lesite %} <span class="fa fa-angle-double-right"> </span> Entrées  
+						{% endblock %}
+{% block titre %}
+	Nouvelle  entrée  du fournisseur
+	<mark> {{entree.fournisseur}} <mark>
+{% endblock %}
+{% block lesboutons %}
+	<a href="{{ path('entree_index') }}" title="Retour à la liste " class="btn btn-info">
+		<i class="fa fa-reply-all"></i>
+	</a>
+{% endblock %}
+{% block body %}
+	{{ include('entree/_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}RMensuelSite index{% endblock %}
+
+{% block titre %}
+	Tous les rapports 
+{% endblock %}
+	{% block lesite %} <span class="fa fa-angle-double-right"> </span> Rapports 
+						{% endblock %}
+{% block lesboutons %}
+	<a href="{{ path('r_mensuel_site_new') }}" type="button" title="Ajouter nouveau " class="btn btn-info">
+		<i class="fas fa-plus-circle"></i>
+	</a>
+{% endblock %}
+{% block body %}
+
+	<table id="example1" class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Mois/année</th>
+                <th>Statut</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>#</th>
+                <th>Mois/année</th>
+                <th>Statut</th>
+                <th>actions</th>
+            </tr>
+        </tfoot>
+        <tbody>
+        {% for r_mensuel_site in r_mensuel_sites %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td> {% if r_mensuel_site.designationMois %}{{ r_mensuel_site.designationMois }} - {{ r_mensuel_site.annee }} {% else %}{{ r_mensuel_site.mois }} - {{ r_mensuel_site.annee }} {% endif %}</td>
+                <td>{% if r_mensuel_site.isCloture %}<span class="fa fa-check-circle text-success" > </span> {% else %}<span class="fa fa-times text-danger" > </span> {% endif %}</td>
+                <td>
+                <div class="btn-group">
+                    <a class="btn btn-default" href="{{ path('r_mensuel_site_show', {'id': r_mensuel_site.id}) }}">
+                    <span class="fa fa-search-plus"> </span>
+                    </a>
+                </div>
+                    {# <a href="{{ path('r_mensuel_site_edit', {'id': r_mensuel_site.id}) }}">edit</a> #}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

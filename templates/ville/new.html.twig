@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Ville
+{% endblock %}
+{% block titre %}
+	Créer des villes
+{% endblock %}
+	{% block lesite %} <span class="fa fa-angle-double-right"> </span> Config.  
+						{% endblock %}
+{% block lesboutons %}
+	<a href="{{ path('ville_index') }}" title="Retour à la liste " class="btn btn-info">
+		<i class="fa fa-reply-all"></i>
+	</a>
+{% endblock %}
+{% block body %}
+	{{ include('ville/_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,152 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Entree
+{% endblock %}
+
+{% block titre %}
+	Détail du controle
+	{{controle.code}}
+{% endblock %}
+{% block lesite %}
+	<span class="fa fa-angle-double-right"></span>
+	Contrôles
+{% endblock %}
+{% block lesboutons %}
+	<a href="{{ path('controle_index') }}" title="Retour à la liste " class="btn btn-info">
+		<i class="fa fa-reply-all"></i>
+	</a>
+	<a href="{{ path('controle_new') }}" title="Nouveau contrôle " class="btn btn-info">
+		<i class="fa fa-plus"></i>
+	</a>
+{% endblock %}
+{% block body %}
+	<!-- Main content -->
+	<div
+		class="invoice p-3 mb-3">
+		<!-- title row -->
+		<div class="row">
+			<div class="col-12">
+				<h4>
+					<i class="fas fa-subway text-danger"></i>
+					Bill<span class="text-danger">C</span>ard Manager Stock.
+					<small class="float-right">Date:
+						{{controle.date|date('d/M/Y')}}</small>
+				</h4>
+			</div>
+			<!-- /.col -->
+		</div>
+		<!-- info row -->
+		<div class="row invoice-info">
+			<div class="col-sm-4 invoice-col">
+				Auditeur
+				<address>
+					<strong>{{controle.user.nom|title}}</strong><br>
+					Adresse:
+					{{controle.user.adresse}}<br>
+					Ville:
+					<br>
+					Phone:
+					{{controle.user.telephone}}<br>
+					Email:
+					{{controle.user.email}}
+				</address>
+			</div>
+			<!-- /.col -->
+			<div class="col-sm-4 invoice-col">
+				Site audité
+				<address>
+					<strong>{{controle.site}}</strong><br>
+					Adresse:
+					{{controle.site.adresse}}<br>
+					Ville:
+					<br>
+					Phone:
+					{{controle.site.telephone}}<br>
+					Email:
+					{{controle.site.email}}
+				</address>
+			</div>
+			<!-- /.col -->
+			<div class="col-sm-4 invoice-col">
+				<b>Controle #
+					{{controle.code}}
+					{% if controle.isValidee %}
+						<i class="fas fa-check-circle text-success"></i>
+					{% else %}
+						<i class="fa fa-times text-danger"></i>
+					{% endif %}
+				</b><br>
+				<br>
+				{# <b>Code dépot/site:</b>
+																{{controle.site.code}}<br>
+																<b>Code controle :</b>
+																{{controle.code}} #}
+			</div>
+			<!-- /.col -->
+		</div>
+		<!-- /.row -->
+
+		<!-- Table row -->
+		<div class="row">
+			<div class="col-12 table-responsive">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>Product No</th>
+							<th>Qty physique</th>
+							<th>Qty billcard</th>
+							<th>Manquant</th>
+							<th>Surplus</th>
+							<th>Observation</th>
+						</tr>
+					</thead>
+					<tbody>
+
+						{% for ligne in controle.ligneControles %}
+							<tr>
+								<td>{{ligne.produitSite}}</td>
+								<td>{{ligne.quantitePhysique}}</td>
+								<td>{{ligne.quantiteBillcard}}
+								</td>
+								<td>{{ligne.manquant}}
+								</td>
+								<td>{{ligne.surplus}}
+								</td>
+								<td>{{ligne.observation}}
+								</td>
+							</tr>
+						{% endfor %}
+					
+					</tbody>
+				</table>
+					<div class="text-center">
+						Observation Finale : {{controle.observationFinale}}
+						</div>
+			</div>
+			<!-- /.col -->
+		</div>
+		<!-- /.row -->
+
+		<!-- this row will not appear when printing -->
+		<div class="row no-print">
+			<div class="col-12">
+				<a onclick="window.print()" rel="noopener" target="_blank" class="btn btn-default mr-1 ml-1">
+					<i class="fas fa-print"></i>
+					Imprimer</a>
+
+				{% if not  controle.isValidee %}
+
+
+					<a href="{{ path('controle_edit', {'id': controle.id}) }}" class="btn btn-success mr-1 float-right">
+						<i class="far fa-edit"></i>
+						Modifier
+					</a>
+					{{ include('controle/_valider_form.html.twig') }}
+					{{ include('controle/_delete_form.html.twig') }}
+
+				{% endif %}
+
+			</div>
+		</div>
+	</div>
+{% endblock %}

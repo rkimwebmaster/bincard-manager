@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+	{% block lesite %} <span class="fa fa-angle-double-right"> </span> Config.  
+						{% endblock %}
+{% block title %}ProduitSite{% endblock %}
+
+		{% block titre %}
+				Détail produit site 
+				{% endblock %}
+                     {% block lesboutons %}
+	<a  href="{{ path('produit_site_index') }}" title="Retour à la liste " class="btn btn-info">
+		<i class="fa fa-reply-all"></i>
+	</a>
+{% endblock %}
+
+{% block body %}
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>#</th>
+                <td>{{ produit_site.id }}</td>
+            </tr>
+            <tr>
+                <th>Quantite</th>
+                <td>{{ produit_site.quantite }}</td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock %}

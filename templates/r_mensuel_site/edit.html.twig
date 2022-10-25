@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit RMensuelSite{% endblock %}
+
+{% block body %}
+    <h1>Edit RMensuelSite</h1>
+
+    {{ include('r_mensuel_site/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('r_mensuel_site_index') }}">back to list</a>
+
+    {{ include('r_mensuel_site/_delete_form.html.twig') }}
+{% endblock %}

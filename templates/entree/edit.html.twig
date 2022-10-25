@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier Entrée
+{% endblock %}
+	{% block lesite %} <span class="fa fa-angle-double-right"> </span> Entrées  
+						{% endblock %}
+{% block lesboutons %}
+	<a href="{{ path('entree_index') }}" title="Retour à la liste " class="btn btn-info">
+		<i class="fa fa-reply-all"></i>
+	</a>
+{% endblock %}
+
+{% block body %}
+	{{ form_start(form) }}
+
+	{{ form_label(form.date) }}
+	{{ form_widget(form.date) }}
+	{{ form_errors(form.date) }}
+
+
+	{{ form_label(form.fournisseur) }}
+	{{ form_widget(form.fournisseur) }}
+	{{ form_errors(form.fournisseur) }}
+
+	{{ form_label(form.numeroBonFournisseur) }}
+	{{ form_widget(form.numeroBonFournisseur) }}
+	{{ form_errors(form.numeroBonFournisseur) }}
+
+	<h3>Les détails des entr&eacute;es
+	</h3>
+	<ul class="tags list-inline" data-prototype="{{ form_widget(form.ligneEntrees.vars.prototype)|e('html_attr') }}">
+		{% for ligneEntree in form.ligneEntrees   %}
+			<tr>
+				<td>{{ form_row(ligneEntree.produit)}}
+				</td>
+				<td>
+					{{ form_row(ligneEntree.quantite)}}
+				</td>
+				<td>
+					{{ form_row(ligneEntree.observation)}}
+				</td>
+			</tr>
+		{% endfor %}
+	</ul>
+	<br/>
+	<button class="btn btn-success">{{ button_label|default('Enregistrer') }}</button>
+	{{ form_end(form) }}
+{% endblock %}

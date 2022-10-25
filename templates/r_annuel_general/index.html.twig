@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}RAnnuelGeneral index{% endblock %}
+{% block titre %}
+	Tous les rapports généraux annuels 
+{% endblock %}
+	{% block lesite %} <span class="fa fa-angle-double-right"> </span> Rapports généraux annuels
+						{% endblock %}
+{% block lesboutons %}
+	<a href="{{ path('r_annuel_general_new') }}" type="button" title="Ajouter nouveau " class="btn btn-info">
+		<i class="fas fa-plus-circle"></i>
+	</a>
+{% endblock %}
+{% block body %}
+	<table id="example1" class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Année</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for r_annuel_general in r_annuel_generals %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>Rapport général {{ r_annuel_general.annee }}</td>
+                <td>
+                <div class="btn-group">
+                    <a class="btn btn-default" href="{{ path('r_annuel_general_show', {'id': r_annuel_general.id}) }}"><span class="fa fa-search-plus"> </span></a>
+                    {# {% if not r_annuel_general.isCloture %} #}
+                    <a class="btn btn-default" href="{{ path('r_annuel_general_delete', {'id': r_annuel_general.id}) }}"><span class="text-danger fa fa-trash" /></a>
+                    {# {% endif %} #}
+               </div>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('r_annuel_general_new') }}">Create new</a>
+{% endblock %}

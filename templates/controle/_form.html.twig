@@ -1,0 +1,35 @@
+{{ form_start(form) }}
+
+{{ form_label(form.date) }}
+{{ form_widget(form.date) }}
+{{ form_errors(form.date) }}
+
+
+{{ form_label(form.code) }}
+{{ form_widget(form.code) }}
+{{ form_errors(form.code) }}
+
+<h3>Les détails des contrôles
+</h3>
+<ul class="tags list-inline" data-prototype="{{ form_widget(form.ligneControles.vars.prototype)|e('html_attr') }}">
+	{% for ligneControle in form.ligneControles   %}
+		<tr>
+			<td>{{ form_row(ligneControle.produitSite)}}
+			</td>
+			<td>
+				{{ form_row(ligneControle.quantitePhysique)}}
+			</td>
+			<td>
+				{{ form_row(ligneControle.observation)}}
+			</td>
+		</tr>
+	{% endfor %}
+</ul>
+{{ form_label(form.observationFinale) }}
+{{ form_widget(form.observationFinale) }}
+{{ form_errors(form.observationFinale) }}
+<br/>
+<button class="btn btn-info">
+	<span class="fa fa-download "></span>
+	{{ button_label|default('Enregistrer') }}</button>
+{{ form_end(form) }}

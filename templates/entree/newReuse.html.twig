@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Entree
+{% endblock %}
+
+{% block titre %}
+	Nouvelle  entrée  reuse 
+{% endblock %}
+{% block lesboutons %}
+	<a href="{{ path('entree_index') }}" title="Retour à la liste " class="btn btn-info">
+		<i class="fa fa-reply-all"></i>
+	</a>
+{% endblock %}
+	{% block lesite %} <span class="fa fa-angle-double-right"> </span> Entrées  
+						{% endblock %}
+{% block body %}
+	{{ form_start(form) }}
+
+	{{ form_label(form.date) }}
+	{{ form_widget(form.date) }}
+	{{ form_errors(form.date) }}
+
+	<h3>Les détails des entr&eacute;es reuses</h3>
+	<ul class=" vvv " data-prototype="{{ form_widget(form.ligneEntrees.vars.prototype)|e('html_attr') }}">
+		{% for ligneEntree in form.ligneEntrees   %}
+			<tr>
+				<td>{{ form_row(ligneEntree.produitSite)}}
+				</td>
+				<td>
+					{{ form_row(ligneEntree.quantite)}}
+				</td>
+				<td>
+					{{ form_row(ligneEntree.observation)}}
+				</td>
+			</tr>
+		{% endfor %}
+	</ul>
+	<br/>
+    <button class="btn btn-info">  
+    <span class="fa fa-download "> </span>
+    {{ button_label|default('Enregistrer') }}</button>
+		{{ form_end(form) }}
+{% endblock %}

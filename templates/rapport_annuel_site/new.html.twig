@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New RapportAnnuelSite{% endblock %}
+
+{% block body %}
+    <h1>Create new RapportAnnuelSite</h1>
+
+    {{ include('rapport_annuel_site/_form.html.twig') }}
+
+    <a href="{{ path('rapport_annuel_site_index') }}">back to list</a>
+{% endblock %}

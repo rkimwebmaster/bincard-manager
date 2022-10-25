@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Ligne Damage{% endblock %}
+		{% block titre %}
+				Nouveau damage  
+				{% endblock %}
+{% block body %}
+    {{ include('ligne_damage/_form.html.twig') }}
+
+    <a href="{{ path('ligne_damage_index') }}">back to list</a>
+{% endblock %}

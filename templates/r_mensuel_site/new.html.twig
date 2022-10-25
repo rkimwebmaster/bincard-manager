@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New RMensuelSite{% endblock %}
+
+{% block body %}
+    <h1>Create new RMensuelSite</h1>
+
+    {{ include('r_mensuel_site/_form.html.twig') }}
+
+    <a href="{{ path('r_mensuel_site_index') }}">back to list</a>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dispatch  liste {% endblock %}
+
+		{% block titre %}
+				Liste des dispatches {% endblock %}
+{% block body %}
+
+<table id="example1" class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Date</th>
+                <th>Dépot </th>
+                <th>Produit</th>
+                <th>Etat</th>
+                <th>Quantité et Sites </th>
+                <th>Solde</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for dispatch in dispatches %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ dispatch.date ? dispatch.date|date('d-M-Y') : '' }}</td>
+                <td>{{ dispatch.depot }}</td>
+                <td>{{ dispatch.produitDepot }}</td>
+                <td>{{ dispatch.isValidee }}</td>
+                <td>
+                {% for ligne in  dispatch.ligneDispatches %}
+                    {{ligne.quantite}}--{{ligne.site}} <br />
+                {% endfor %}
+                
+                </td>
+                <td>{{ dispatch.soldeProduit }}</td>
+                <td>
+                    <a href="{{ path('dispatch_show', {'id': dispatch.id}) }}">voir</a>
+                    <a href="{{ path('dispatch_edit', {'id': dispatch.id}) }}">modifier</a>
+                    <a href="{{ path('dispatch_valider', {'id': dispatch.id}) }}">valider</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">aucun enregistrements dans la base</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        
+{% endblock %}

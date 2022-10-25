@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ProduitSite  liste
+{% endblock %}
+{% block titre %}
+	Liste des produits du site
+	{{app.user.siteActif}}
+{% endblock %}
+{% block lesite %}
+	<span class="fa fa-angle-double-right"></span>
+	Config.
+{% endblock %}
+{% block body %}
+
+	<table id="example1" class="table table-bordered table-striped">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>PN</th>
+				<th>Description</th>
+				<th>Quantité</th>
+				<th>actions</th>
+			</tr>
+		</thead>
+		<tfoot>
+			<tr>
+				<th>#</th>
+				<th>PN</th>
+				<th>Description</th>
+				<th>Quantité</th>
+				<th>actions</th>
+			</tr>
+		</tfoot>
+		<tbody>
+			{% for produit in produits %}
+				<tr {% if produit.isDangerStock %} class="text-danger" title="danger de stock" {% endif %}>
+					<td>{{ loop.index }}</td>
+					<td>{{ produit.produit.pn }}</td>
+					<td>{{ produit.produit.description }}</td>
+					<td>{{ produit.quantite }}</td>
+					<td>
+						<div class="btn-group m-0 float-sm-right">
+							<a href="{{ path('produit_site_edit', {'id': produit.id}) }}" title="Modifier élément  " class="btn btn-info btn-sm">
+								<i class="fas fa-edit"></i>
+							</a>
+							<a href="{{ path('nouveau_damage', {'id': produit.id}) }}" title="Sortie damage  " class="btn btn-info btn-sm">
+								<i class="fas fa-bolt"></i>
+							</a>
+						</a>
+						<a href="{{ path('entree_reuse_new', {'id': produit.id}) }}" title="Entrée reuse  " class="btn btn-info btn-sm">
+							<i class="fas fa-fa-clock-o"></i>
+						</a>
+					</td>
+				</tr>
+			</div>
+		</tbody>
+	</td>
+</tr>{% else %}
+<tr>
+	<td colspan="6">aucun enregistrements dans la base</td>
+</tr>{% endfor %}</tbody></table>{% endblock %}

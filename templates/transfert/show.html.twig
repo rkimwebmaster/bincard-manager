@@ -1,0 +1,122 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}transfert
+{% endblock %}
+
+{% block titre %}
+	Détail du transfert
+{% endblock %}
+	{% block lesite %} <span class="fa fa-angle-double-right"> </span> Transferts  
+						{% endblock %}
+   {% block lesboutons %}
+	<a  href="{{ path('transfert_index') }}" title="Retour à la liste " class="btn btn-info">
+		<i class="fa fa-reply-all"></i>
+	</a>
+{% endblock %}
+{% block body %}
+	<!-- Main content -->
+	<div
+		class="invoice p-3 mb-3">
+		<!-- title row -->
+		<div class="row">
+			<div class="col-12">
+				<h4>
+					<i class="fas fa-subway text-danger"></i>
+					Bill<span class="text-danger">C</span>ard Manager Stock.
+					<small class="float-right">Date:
+						{{transfert.date|date('d/M/Y')}}</small>
+				</h4>
+			</div>
+			<!-- /.col -->
+		</div>
+		<!-- info row -->
+		<div class="row invoice-info">
+			<div class="col-sm-4 invoice-col">
+				Site envoyeur 
+				<address>
+					<strong>{{transfert.siteEnvoie.designation}} </strong><br>
+					Adresse: {{transfert.siteEnvoie.adresse}}<br>
+					Ville: {{transfert.siteEnvoie.ville}}<br>
+					Phone: {{transfert.siteEnvoie.telephone}}<br>
+					Email: {{transfert.siteEnvoie.email}}
+				</address>
+			</div>
+			<!-- /.col -->
+			<div class="col-sm-4 invoice-col">
+				Site recepteur 
+				<address>
+	            	<strong>{{transfert.siteReception.designation}}</strong><br>
+					Adresse: {{transfert.siteReception.adresse}}<br>
+					Ville: {{transfert.siteReception.ville}}<br>
+					Phone: {{transfert.siteReception.telephone}}<br>
+					Email: {{transfert.siteReception.email}}
+				</address>
+			</div>
+			<!-- /.col -->
+			<div class="col-sm-4 invoice-col">
+				<b>Transfert #{{transfert.code}}</b><br>
+				<br>
+				<b>Code site emétteur:</b>
+				{{transfert.siteEnvoie.code}}<br>
+				<b>Code site reception :</b>
+				{{transfert.siteReception.code}}
+			</div>
+			<!-- /.col -->
+		</div>
+		<!-- /.row -->
+
+		<!-- Table row -->
+		<div class="row">
+			<div class="col-12 table-responsive">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>Product No</th>
+							<th>Qty</th>
+						</tr>
+					</thead>
+					<tbody>
+
+						{% for ligne in transfert.ligneTransferts %}
+							<tr>
+								<td>{{ligne.produitSite}}</td>
+								<td>{{ligne.quantite}}</td>
+							</tr>
+						{% endfor %}
+
+					</tbody>
+				</table>
+			</div>
+			<!-- /.col -->
+		</div>
+		<!-- /.row -->
+
+		<!-- this row will not appear when printing -->
+		<div class="row no-print">
+			<div class="col-12">
+				<a onClick="window.print()" rel="noopener" target="_blank" class="btn btn-default">
+					<i class="fas fa-print"></i>
+					Imprimer</a>
+					{#
+				<a  href="{{ path('transfert_edit', {'id': transfert.id}) }}" class="btn btn-success float-right">
+					<i class="far fa-credit-card"></i>
+					Modifier
+				</a>
+				#}
+	{% if not  transfert.isValidee  %}
+								{% if transfert.siteReception == app.user.siteActif  %}
+									<a class="btn btn-info" href="{{ path('transfert_valider', {'id': transfert.id}) }}">
+										<i class="fas fa-check-circle">valider</i>
+									</a>
+								{% endif %}
+							{% endif %}
+										{% if transfert.siteEnvoie == app.user.siteActif  %}
+							{% if not  transfert.isValidee  %}
+    {{ include('transfert/_delete_form.html.twig') }}
+				
+				{% endif %}
+				{% endif %}
+			</div>
+		</div>
+	</div>
+{% endblock %}

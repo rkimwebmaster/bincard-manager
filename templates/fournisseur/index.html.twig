@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Fournisseur  liste
+{% endblock %}
+{% block titre %}
+	Liste des fournisseurs
+{% endblock %}
+	{% block lesite %} <span class="fa fa-angle-double-right"> </span> Config.  
+						{% endblock %}
+{% block lesboutons %}
+	<a href="{{ path('fournisseur_new') }}" type="button" title="Ajouter nouveau " class="btn btn-info">
+		<i class="fas fa-plus-circle"></i>
+	</a>
+{% endblock %}
+
+{% block body %}
+
+	<table id="example1" class="table table-bordered table-striped">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Noms</th>
+				<th>Téléphone</th>
+				<th>E-mail</th>
+				<th>Code</th>
+				<th>actions</th>
+			</tr>
+		</thead>
+				<tfoot>
+			<tr>
+				<th>#</th>
+				<th>Noms</th>
+				<th>Téléphone</th>
+				<th>E-mail</th>
+				<th>Code</th>
+				<th>actions</th>
+			</tr>
+		</tfoot>
+		<tbody>
+			{% for fournisseur in fournisseurs %}
+				<tr>
+					<td>{{ loop.index }}</td>
+					<td>{{ fournisseur.noms }}</td>
+					<td>{{ fournisseur.telephone }}</td>
+					<td>{{ fournisseur.email }}</td>
+					<td>{{ fournisseur.code }}</td>
+					<td>
+						<div class="btn-group float-sm-right">
+							<a href="{{ path('fournisseur_show', {'id': fournisseur.id}) }}" class="btn btn-info">
+								<i class="fa fa-eye"></i>
+                            </a>
+							<a href="{{ path('fournisseur_edit', {'id': fournisseur.id}) }}" class="btn btn-info">
+								<i class="fa fa-edit"></i>
+                            </a>
+						</div>
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="6">aucun enregistrements dans la base</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+{% endblock %}

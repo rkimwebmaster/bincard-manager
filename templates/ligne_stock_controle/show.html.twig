@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}LigneStockControle{% endblock %}
+
+{% block body %}
+    <h1>LigneStockControle</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ ligne_stock_controle.id }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ ligne_stock_controle.date ? ligne_stock_controle.date|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>MachineNumber</th>
+                <td>{{ ligne_stock_controle.machineNumber }}</td>
+            </tr>
+            <tr>
+                <th>DeliveryNoteNumber</th>
+                <td>{{ ligne_stock_controle.deliveryNoteNumber }}</td>
+            </tr>
+            <tr>
+                <th>QuantityReceived</th>
+                <td>{{ ligne_stock_controle.quantityReceived }}</td>
+            </tr>
+            <tr>
+                <th>Supplier</th>
+                <td>{{ ligne_stock_controle.supplier }}</td>
+            </tr>
+            <tr>
+                <th>Customer</th>
+                <td>{{ ligne_stock_controle.customer }}</td>
+            </tr>
+            <tr>
+                <th>IjdNumber</th>
+                <td>{{ ligne_stock_controle.ijdNumber }}</td>
+            </tr>
+            <tr>
+                <th>QuantitySold</th>
+                <td>{{ ligne_stock_controle.quantitySold }}</td>
+            </tr>
+            <tr>
+                <th>TotalBalance</th>
+                <td>{{ ligne_stock_controle.totalBalance }}</td>
+            </tr>
+            <tr>
+                <th>CreatedAt</th>
+                <td>{{ ligne_stock_controle.createdAt ? ligne_stock_controle.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>UpdatedAt</th>
+                <td>{{ ligne_stock_controle.updatedAt ? ligne_stock_controle.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>NumeroDNN</th>
+                <td>{{ ligne_stock_controle.numeroDNN }}</td>
+            </tr>
+            <tr>
+                <th>NumeroMouvement</th>
+                <td>{{ ligne_stock_controle.numeroMouvement }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('ligne_stock_controle_index') }}">back to list</a>
+
+    <a href="{{ path('ligne_stock_controle_edit', {'id': ligne_stock_controle.id}) }}">edit</a>
+
+    {{ include('ligne_stock_controle/_delete_form.html.twig') }}
+{% endblock %}

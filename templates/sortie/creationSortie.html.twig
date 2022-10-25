@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Client  liste
+{% endblock %}
+{% block lesite %}
+	<span class="fa fa-angle-double-right"></span>
+	Sortie
+{% endblock %}
+{% block titre %}
+	Créer une sortie vers un client de votre choix
+{% endblock %}
+{% block lesboutons %}
+	<a href="{{ path('sortie_index') }}" title="Retour à la liste " class="btn btn-info">
+		<i class="fa fa-reply-all"></i>
+	</a>
+{% endblock %}
+{% block body %}
+	<table id="example1" class="table table-bordered table-striped">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Clients
+				</th>
+			</tr>
+		</thead>
+		<tfoot>
+			<tr>
+				<th>#</th>
+				<th>Clients
+				</th>
+			</tr>
+		</tfoot>
+		<tbody>
+			{% for client in clients %}
+				<tr>
+					<td>{{ loop.index }}</td>
+					<td>
+						<a title="sortie vers client " href="{{ path('sortie_new', {'id': client.id}) }}">
+							{{ client.noms }}
+							-{{ client.code }}-
+							{{ client.telephone }}
+						</a>
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="2">aucun enregistrements dans la base</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+{% endblock %}

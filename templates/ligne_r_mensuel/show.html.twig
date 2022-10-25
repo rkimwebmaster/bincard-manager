@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}LigneRMensuel{% endblock %}
+
+{% block body %}
+    <h1>LigneRMensuel</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ ligne_r_mensuel.id }}</td>
+            </tr>
+            <tr>
+                <th>QuantiteInitiale</th>
+                <td>{{ ligne_r_mensuel.quantiteInitiale }}</td>
+            </tr>
+            <tr>
+                <th>QuantiteEntree</th>
+                <td>{{ ligne_r_mensuel.quantiteEntree }}</td>
+            </tr>
+            <tr>
+                <th>QuantiteEntreeSpeciale</th>
+                <td>{{ ligne_r_mensuel.quantiteEntreeSpeciale }}</td>
+            </tr>
+            <tr>
+                <th>QuantiteEntreeTransfert</th>
+                <td>{{ ligne_r_mensuel.quantiteEntreeTransfert }}</td>
+            </tr>
+            <tr>
+                <th>QuantiteEntreeReuse</th>
+                <td>{{ ligne_r_mensuel.quantiteEntreeReuse }}</td>
+            </tr>
+            <tr>
+                <th>SortieClient</th>
+                <td>{{ ligne_r_mensuel.sortieClient }}</td>
+            </tr>
+            <tr>
+                <th>SortieSpeciale</th>
+                <td>{{ ligne_r_mensuel.sortieSpeciale }}</td>
+            </tr>
+            <tr>
+                <th>QuantiteSortieTransfert</th>
+                <td>{{ ligne_r_mensuel.quantiteSortieTransfert }}</td>
+            </tr>
+            <tr>
+                <th>QuantiteFinale</th>
+                <td>{{ ligne_r_mensuel.quantiteFinale }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('ligne_r_mensuel_index') }}">back to list</a>
+
+    <a href="{{ path('ligne_r_mensuel_edit', {'id': ligne_r_mensuel.id}) }}">edit</a>
+
+    {{ include('ligne_r_mensuel/_delete_form.html.twig') }}
+{% endblock %}

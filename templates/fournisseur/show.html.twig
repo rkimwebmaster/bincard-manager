@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Fournisseur
+{% endblock %}
+	{% block lesite %} <span class="fa fa-angle-double-right"> </span> Config.  
+						{% endblock %}
+{% block titre %}
+		 	Voir détail fournisseur
+{% endblock %}
+{% block lesboutons %}
+	<a  href="{{ path('fournisseur_index') }}" title="Retour à la liste " class="btn btn-info">
+		<i class="fa fa-reply-all"></i>
+	</a>
+	<a href="{{ path('client_edit', {'id': fournisseur.id}) }}" title="Modifier élément" class="btn btn-info">
+		<i class="fas fa-edit"></i>
+	</a>
+{% endblock %}
+{% block body %}
+	<table class="table">
+		<tbody>
+			<tr>
+				<th>Noms</th>
+				<td>{{ fournisseur.noms }}</td>
+			</tr>
+			<tr>
+				<th>Téléphone</th>
+				<td>{{ fournisseur.telephone }}</td>
+			</tr>
+			<tr>
+				<th>Email</th>
+				<td>{{ fournisseur.email }}</td>
+			</tr>
+			<tr>
+				<th>Ville</th>
+				<td>{{ fournisseur.ville }}</td>
+			</tr>
+			<tr>
+				<th>Code</th>
+				<td>{{ fournisseur.code }}</td>
+			</tr>
+		</tbody>
+	</table>
+	{{ include('fournisseur/_delete_form.html.twig') }}
+{% endblock %}

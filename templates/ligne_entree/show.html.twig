@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}LigneEntree{% endblock %}
+
+{% block body %}
+    <h1>LigneEntree</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ ligne_entree.id }}</td>
+            </tr>
+            <tr>
+                <th>Quantite</th>
+                <td>{{ ligne_entree.quantite }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('ligne_entree_index') }}">back to list</a>
+
+    <a href="{{ path('ligne_entree_edit', {'id': ligne_entree.id}) }}">edit</a>
+
+    {{ include('ligne_entree/_delete_form.html.twig') }}
+{% endblock %}

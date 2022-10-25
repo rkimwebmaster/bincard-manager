@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Produit
+{% endblock %}
+	{% block lesite %} <span class="fa fa-angle-double-right"> </span> Config.  
+						{% endblock %}
+{% block titre %}
+	Modifier produit
+{% endblock %}
+{% block lesboutons %}
+	<a href="{{ path('produit_index') }}" title="Retour à la liste " class="btn btn-info">
+		<i class="fa fa-reply-all"></i>
+	</a>
+	<a action="{{ path('produit_delete', {'id': produit.id}) }}" title="Retour à la liste " class="btn btn-info">
+		<i class="fa fa-trash"></i>
+	</a>
+{% endblock %}
+{% block body %}
+	{{ include('produit/_form.html.twig', {'button_label': 'Update'}) }}
+{% endblock %}

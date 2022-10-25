@@ -1,0 +1,5 @@
+<form style="margin:0px; float:left"  method="post" action="{{ path('controle_valider', {'id': controle.id}) }}" onsubmit="return confirm('Voulez-vous vraiment valider ce contrôle?');">
+    <input type="hidden" name="_method" value="GET">
+    <button class="btn btn-warning"><i class="far fa-check-circle"></i>
+Valider</button>
+</form>

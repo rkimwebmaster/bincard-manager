@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Sortie
+{% endblock %}
+
+{% block titre %}
+	Nouvelle  sortie  damage
+{% endblock %}
+{% block lesboutons %}
+	<a href="{{ path('entree_index') }}" title="Retour à la liste " class="btn btn-info">
+		<i class="fa fa-reply-all"></i>
+	</a>
+{% endblock %}
+{% block lesite %}
+	<span class="fa fa-angle-double-right"></span>
+	Entrées
+{% endblock %}
+{% block body %}
+	{{ form_start(form) }}
+
+	{{ form_label(form.date) }}
+	{{ form_widget(form.date) }}
+	{{ form_errors(form.date) }}
+
+	{{ form_row(form.observation) }}
+
+	<h3>Les détails des sorties damages</h3>
+	<ul class=" vvv " data-prototype="{{ form_widget(form.ligneSorties.vars.prototype)|e('html_attr') }}">
+		{% for ligneSortie in form.ligneSorties   %}
+			<tr>
+				<td>{{ form_row(ligneSortie.produitSite)}}
+				</td>
+				<td>
+					{{ form_row(ligneSortie.quantite)}}
+				</td>
+				<td>
+					{{ form_row(ligneSortie.observation)}}
+				</td>
+			</tr>
+		{% endfor %}
+	</ul>
+	<br/>
+	<button class="btn btn-info">
+		<span class="fa fa-download "></span>
+		{{ button_label|default('Enregistrer') }}</button>
+	{{ form_end(form) }}
+{% endblock %}

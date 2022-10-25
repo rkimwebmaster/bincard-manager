@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Produit  liste {% endblock %}
+
+	{% block lesite %} <span class="fa fa-angle-double-right"> </span> Sortie  
+						{% endblock %}
+		{% block titre %}
+				Liste des produits     <a href="{{ path('produit_new') }}">Créer nouveau</a>
+				{% endblock %}
+{% block body %}
+
+<table id="example1" class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Produit </th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for produit in produits %}
+            <tr {% if produit.isDangerStock %} class="text-danger"  title="danger de stock" {% endif %}>
+                <td>{{ loop.index }}</td>
+                <td><a href="">
+                {{ produit.pn }} {{ produit.description }} 
+                </a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="2">aucun enregistrements dans la base</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Client
+{% endblock %}
+{% block titre %}
+	Voir client
+{% endblock %}
+	{% block lesite %} <span class="fa fa-angle-double-right"> </span> Config.   
+						{% endblock %}
+{% block lesboutons %}
+	<a  href="{{ path('client_index') }}" title="Retour à la liste " class="btn btn-info">
+		<i class="fa fa-reply-all"></i>
+	</a>
+	<a href="{{ path('client_new') }}"  type="button" title="Ajouter nouveau " class="btn btn-info">
+		<i class="fas fa-plus-circle"></i>
+	</a>
+	<a href="{{ path('client_edit', {'id': client.id}) }}" title="Modifier élément  " class="btn btn-info">
+		<i class="fas fa-edit"></i>
+	</a>
+	<a {{ path('client_delete', {'id': client.id}) }} title="Supprimer élément" class="btn btn-info">
+		<i class="fas fa-trash "></i>
+	</a>
+{% endblock %}
+{% block body %}
+	<table class="table">
+		<tbody>
+			<tr>
+				<th>Noms</th>
+				<td>{{ client.noms }}</td>
+			</tr>
+			<tr>
+				<th>Telephone</th>
+				<td>{{ client.telephone }}</td>
+			</tr>
+			<tr>
+				<th>Email</th>
+				<td>{{ client.email }}</td>
+			</tr>
+			<tr>
+				<th>Ville</th>
+				<td>{{ client.ville }}</td>
+			</tr>
+			<tr>
+				<th>Code</th>
+				<td>{{ client.code }}</td>
+			</tr>
+		</tbody>
+	</table>
+{% endblock %}

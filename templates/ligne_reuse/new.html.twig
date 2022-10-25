@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New LigneReuse{% endblock %}
+	{% block titre %}
+				Nouveau reuse du site {{app.user.siteActif}}  {% endblock %}
+{% block body %}
+    {{ include('ligne_reuse/_form.html.twig') }}
+
+    <a href="{{ path('ligne_reuse_index') }}">retour à la liste </a>
+{% endblock %}

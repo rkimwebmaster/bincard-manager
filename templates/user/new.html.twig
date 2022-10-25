@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvel utilisateur {% endblock %}
+	{% block lesite %} <span class="fa fa-angle-double-right"> </span> Profile  
+						{% endblock %}
+{% block lesboutons %}
+	<a href="{{ path('user_index') }}" title="Retour à la liste " class="btn btn-info">
+		<i class="fa fa-reply-all"></i>
+	</a>
+	<a action="{{ path('user_delete', {'id': user.id}) }}" onclick="return confirm('Etes-vous sûre de vouloir supprimer cet élément?');" title="Supprimer élément" class="btn btn-info">
+		<i class="fas fa-trash"></i>
+	</a>
+{% endblock %}
+{% block titre %}
+Nouvel utilisateur 
+{% endblock %}
+{% block body %}
+    {{ include('user/_form.html.twig') }}
+{% endblock %}

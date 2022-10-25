@@ -1,0 +1,231 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User
+{% endblock %}
+{% block titre %}
+	Gestion de profile utilisateur
+{% endblock %}
+	{% block lesite %} <span class="fa fa-angle-double-right"> </span> Profile  
+						{% endblock %}
+{% block lesboutons %}
+	<a href="{{ path('user_index') }}" title="Retour à la liste " class="btn btn-info">
+		<i class="fa fa-reply-all"></i>
+	</a>
+	<a href="{{ path('app_register') }}" title="Ajouter nouveau " class="btn btn-info">
+		<i class="fas fa-plus-circle"></i>
+	</a>
+	<a action="{{ path('user_delete', {'id': user.id}) }}" onclick="return confirm('Etes-vous sûre de vouloir supprimer cet élément?');" title="Supprimer élément" class="btn btn-info">
+		<i class="fas fa-trash"></i>
+	</a>
+{% endblock %}
+{% block body %}
+	<!-- Main content -->
+	<section class="content">
+		<div class="container-fluid">
+			<div class="row">
+				<div
+					class="col-md-3">
+
+					<!-- Profile Image -->
+					<div class="card card-primary card-outline">
+						<div class="card-body box-profile">
+							<div class="text-center">
+								<img class="profile-user-img img-fluid img-circle" src="{{asset('dist/img/profilavatar.jpg')}}" alt="User profile picture">
+							</div>
+
+							<h3 class="profile-username text-center">{{app.user}}</h3>
+
+							<p class="text-muted text-center">
+								{% if app.user %}
+									{{app.user.siteActif}}
+								{% endif %}
+							</p>
+
+							<ul class="list-group list-group-unbordered mb-3">
+								<li class="list-group-item">
+									<b>Noms</b>
+									<a class="float-right">
+										{{user.nom|title}}
+										{{user.nom|title}}
+									</a>
+								</li>
+								<li class="list-group-item">
+									<b>Email</b>
+									<a class="float-right">
+										{{user.email}}
+									</a>
+								</li>
+								<li class="list-group-item">
+									<b>Téléphones
+									</b>
+									<a class="float-right">{{user.telephone}}</a>
+								</li>
+								<li class="list-group-item">
+									<b>Adresse
+									</b>
+									<a class="float-right">{{user.adresse}}</a>
+								</li>
+							</ul>
+
+							<a href="#" class="btn btn-primary btn-block">
+								<b>Follow</b>
+							</a>
+						</div>
+						<!-- /.card-body -->
+					</div>
+					<!-- /.card -->
+				</div>
+				<!-- /.col -->
+				<div class="col-md-9">
+					<div class="card">
+						<div class="card-header p-2">
+							<ul class="nav nav-pills">
+								<li class="nav-item">
+									<a class="nav-link " href="#activity" data-toggle="tab">Profile
+									</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link active" href="#timeline" data-toggle="tab">Modifier mot de passe
+									</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="#settings" data-toggle="tab">Modifier profile</a>
+								</li>
+							</ul>
+						</div>
+						<!-- /.card-header -->
+						<div class="card-body">
+							<div class="tab-content">
+								<div
+									class="active tab-pane" id="activity">
+									<!-- Post -->
+									<div class="post">
+										<div class="user-block">
+											<img class="img-circle img-bordered-sm" src="{{asset('dist/img/profilavatar.jpg')}}" alt="user image">
+											<span class="username">
+												<a href="#">{{app.user}}</a>
+												<a href="#" class="float-right btn-tool">
+													<i class="fas fa-times"></i>
+												</a>
+											</span>
+											<span class="description">Date création:
+												{{app.user.createdAt|date('d/M/Y')}}</span>
+										</div>
+										<!-- /.user-block -->
+										<p>
+											Lorem ipsum represents a long-held tradition for designers,
+																						                        typographers and the like. Some people hate it and argue for
+																						                        its demise, but others ignore the hate as they create awesome
+																						                        tools to help create filler text for everyone from bacon lovers
+																						                        to Charlie Sheen fans.
+										</p>
+
+										<p>
+											<a href="#" class="link-black text-sm mr-2">
+												<i class="fas fa-share mr-1"></i>
+												Share</a>
+											<a href="#" class="link-black text-sm">
+												<i class="far fa-thumbs-up mr-1"></i>
+												Like</a>
+											<span class="float-right">
+												<a href="#" class="link-black text-sm">
+													<i class="far fa-comments mr-1"></i>
+													Comments (5)
+												</a>
+											</span>
+										</p>
+
+										<input class="form-control form-control-sm" type="text" placeholder="Type a comment">
+									</div>
+									<!-- /.post -->
+								</div>
+								<!-- /.tab-pane -->
+								<div
+									class="tab-pane" id="timeline">
+									<!-- Post -->
+									<div class="post">
+										<div class="user-block">
+											<img class="img-circle img-bordered-sm" src="{{asset('dist/img/profilavatar.jpg')}}" alt="user image">
+											<span class="username">
+												<a href="#">{{app.user}}</a>
+												<a href="#" class="float-right btn-tool">
+													<i class="fas fa-times"></i>
+												</a>
+											</span>
+											<span class="description">Date création:
+												{{app.user.createdAt|date('d/M/Y')}}</span>
+										</div>
+										<!-- /.user-block -->
+										<p>
+											Lorem ipsum represents a long-held tradition for designers,
+																						                        typographers and the like. Some people hate it and argue for
+																						                        its demise, but others ignore the hate as they create awesome
+																						                        tools to help create filler text for everyone from bacon lovers
+																						                        to Charlie Sheen fans.
+										</p>
+
+										<p>
+											<a href="#" class="link-black text-sm mr-2">
+												<i class="fas fa-share mr-1"></i>
+												Share</a>
+											<a href="#" class="link-black text-sm">
+												<i class="far fa-thumbs-up mr-1"></i>
+												Like</a>
+											<span class="float-right">
+												<a href="#" class="link-black text-sm">
+													<i class="far fa-comments mr-1"></i>
+													Comments (5)
+												</a>
+											</span>
+										</p>
+
+										<input class="form-control form-control-sm" type="text" placeholder="Type a comment">
+									</div>
+									<!-- /.post -->
+
+
+								</div>
+								<!-- /.tab-pane -->
+
+								<div class="tab-pane" id="settings">
+
+									{% for flashError in app.flashes('verify_email_error') %}
+										<div class="alert alert-danger" role="alert">{{ flashError }}</div>
+									{% endfor %}
+									{{ form_start(registrationForm) }}
+									{{ form_row(registrationForm.username) }}
+									{{ form_row(registrationForm.plainPassword, {
+            label: 'Password'
+        }) }}
+									{{ form_row(registrationForm.nom) }}
+									{{ form_row(registrationForm.postnom) }}
+									{{ form_row(registrationForm.telephone) }}
+									{{ form_row(registrationForm.email) }}
+									{{ form_row(registrationForm.adresse) }}
+									{{ form_row(registrationForm.siteGeres) }}
+									{{ form_row(registrationForm.roles) }}
+									{{ form_row(registrationForm.agreeTerms) }}
+
+									<button class="btn btn-info">
+										<span class="fa fa-download "></span>
+										{{ button_label|default('Enregistrer') }}</button>
+
+									{{ form_end(registrationForm) }}
+
+								</div>
+								<!-- /.tab-pane -->
+							</div>
+							<!-- /.tab-content -->
+						</div>
+						<!-- /.card-body -->
+					</div>
+					<!-- /.card -->
+				</div>
+				<!-- /.col -->
+			</div>
+			<!-- /.row -->
+		</div>
+		<!-- /.container-fluid -->
+	</section>
+	<!-- /.content -->
+{% endblock %}

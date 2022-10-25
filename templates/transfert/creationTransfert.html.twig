@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Site  liste
+{% endblock %}
+
+{% block titre %}
+	Transférer vers un site de votre choix
+{% endblock %}
+{% block lesboutons %}
+	<a href="{{ path('transfert_index') }}" title="Retour à la liste " class="btn btn-info">
+		<i class="fa fa-reply-all"></i>
+	</a>
+{% endblock %}
+{% block lesite %}
+	<span class="fa fa-angle-double-right"></span>
+	Transferts
+{% endblock %}
+{% block body %}
+	<table id="example1" class="table table-bordered table-striped">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Site/Warehouse</th>
+			</tr>
+		</thead>
+		<tbody>
+			{#      #}
+			{% set continue = false %}
+			{% for site in sites %}
+				{% if site.designation == app.user.siteActif.designation %}
+					{% set continue = true %}
+				{% endif %}
+				{% if not continue %}
+					<tr>
+						<td>{{ loop.index }}</td>
+						<td>
+							<a title="transferer " href="{{ path('transfert_new', {'id': site.id}) }}">
+								{{ site.designation }}
+								{% if site.isWarehouse %}
+									<span title="ce site est un warehouse" class="fa fa-tags"></span>
+								{% endif %}
+								-
+								{{ site.code }}-{{ site.adresse }}
+							</a>
+						</td>
+					</tr>
+				{% endif %}
+				{% if continue %}
+					{% set continue = false %}
+				{% endif %}
+			{% else %}
+				<tr>
+					<td colspan="2">aucun enregistrements dans la base</td>
+				</tr>
+			{% endfor %}
+
+		</tbody>
+	</table>
+
+{% endblock %}

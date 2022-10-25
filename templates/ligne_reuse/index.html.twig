@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}LigneReuse index{% endblock %}
+
+	{% block titre %}
+				Liste des reuses du site {{app.user.siteActif}} 
+                 {% endblock %}
+{% block body %}
+
+<table id="example1" class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Date</th>
+                <th>Produit </th>
+                <th>Quantite</th>
+                <th>Observation</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for ligne_reuse in ligne_reuses %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ ligne_reuse.date ? ligne_reuse.date|date('d/M/Y') : '' }}</td>
+                <td>{{ ligne_reuse.produitSite }}</td>
+                <td>{{ ligne_reuse.quantite }}</td>
+                <td>{{ ligne_reuse.observation }}</td>
+                <td>
+                    <a href="{{ path('ligne_reuse_show', {'id': ligne_reuse.id}) }}">show</a>
+                    <a href="{{ path('ligne_reuse_edit', {'id': ligne_reuse.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

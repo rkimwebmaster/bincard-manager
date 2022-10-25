@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Dispatch{% endblock %}
+
+		{% block titre %}
+				Créer nouveau dispatch
+				{% endblock %}
+{% block body %}
+
+    {{ include('dispatch/_form.html.twig') }}
+
+    <a href="{{ path('dispatch_index') }}">retour à la liste </a>
+{% endblock %}

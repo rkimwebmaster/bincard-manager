@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit RapportAnnuelSite{% endblock %}
+
+{% block body %}
+    <h1>Edit RapportAnnuelSite</h1>
+
+    {{ include('rapport_annuel_site/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('rapport_annuel_site_index') }}">back to list</a>
+
+    {{ include('rapport_annuel_site/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+	{% block lesite %} <span class="fa fa-angle-double-right"> </span> Config.  
+						{% endblock %}
+{% block title %}New ProduitSite{% endblock %}
+
+		{% block titre %}
+				Nouveau produit site 	{% endblock %}
+                     {% block lesboutons %}
+	<a  href="{{ path('produit_site_index') }}" title="Retour à la liste " class="btn btn-info">
+		<i class="fa fa-reply-all"></i>
+	</a>
+{% endblock %}
+{% block body %}
+    {{ include('produit_site/_form.html.twig') }}
+
+    <a href="{{ path('produit_site_index') }}">retour à la liste </a>
+{% endblock %}

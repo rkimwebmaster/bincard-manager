@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New LigneStockControle{% endblock %}
+
+{% block body %}
+    <h1>Create new LigneStockControle</h1>
+
+    {{ include('ligne_stock_controle/_form.html.twig') }}
+
+    <a href="{{ path('ligne_stock_controle_index') }}">back to list</a>
+{% endblock %}

@@ -1,0 +1,26 @@
+{{ form_start(form) }}
+
+    {{ form_label(form.date) }}
+    {{ form_widget(form.date) }}
+    {{ form_errors(form.date) }}
+
+	        {{ form_label(form.produitDepot) }}
+    {{ form_widget(form.produitDepot) }}
+    {{ form_errors(form.produitDepot) }}
+		
+	<h3>Les details des dispatches</h3>
+	<ul class="tags list-inline" data-prototype="{{ form_widget(form.ligneDispatches.vars.prototype)|e('html_attr') }}">
+	{% for ligneDispatch in form.ligneDispatches   %}
+		<tr>
+			<td>{{ form_row(ligneDispatch.produit)}} </td>
+			<td>
+			{{ form_row(ligneDispatch.quantite)}}
+			</td>			<td>
+			{{ form_row(ligneDispatch.site)}}
+			</td>
+		</tr>
+	{% endfor %}
+	</ul>
+	<br />
+    <button class="btn btn-success">{{ button_label|default('Enregistrer') }}</button>
+{{ form_end(form) }}

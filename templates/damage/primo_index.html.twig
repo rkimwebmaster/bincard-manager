@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sortie  liste {% endblock %}
+
+		{% block titre %}
+				Liste des sorties <a href="{{url('creation_sortie')}}"> Nouvelle sortie </a>
+				{% endblock %}
+{% block body %}
+
+<table id="example1" class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Date</th>
+                <th>Client</th>
+                <th>IDD # </th>
+                <th>Macine #</th>
+                <th>Site envoie </th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for sortie in sorties %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ sortie.date ? sortie.date|date('d/M/Y') : '' }}</td>
+                <td>{{ sortie.client }}</td>
+                <td>{{ sortie.iddNumber }}</td>
+                <td>{{ sortie.machineNumber }}</td>
+                <td>{{ sortie.siteEnvoie }}</td>
+                <td>
+                    <a href="{{ path('sortie_show', {'id': sortie.id}) }}">voir</a>
+                    <a href="{{ path('sortie_edit', {'id': sortie.id}) }}">modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">aucun enregistrements dans la base</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        
+
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Fournisseur
+{% endblock %}
+	{% block lesite %} <span class="fa fa-angle-double-right"> </span> Config.  
+						{% endblock %}
+{% block titre %}
+	Créer nouveau fournisseur {{fournisseur.code}}
+{% endblock %}
+{% block lesboutons %}
+	<a href="{{ path('fournisseur_index') }}" title="Retour à la liste " class="btn btn-info">
+		<i class="fa fa-reply-all"></i>
+	</a>
+	<a  title="Supprimer élément" class="btn btn-info">
+		<i class="fas fa-trash"></i>
+	</a>
+{% endblock %}
+{% block body %}
+
+	{{ include('fournisseur/_form.html.twig') }}
+{% endblock %}
