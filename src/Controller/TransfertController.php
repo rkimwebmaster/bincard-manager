@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\LigneTransfert;
 use App\Entity\LigneBillcard;
+use App\Entity\LigneStockControle;
 use App\Entity\Transfert;
 use App\Entity\Site;
 use App\Entity\ProduitSite;
@@ -178,6 +179,8 @@ class TransfertController extends AbstractController
      */
     public function valider(Request $request, Transfert $transfert): Response
     {
+        $transfert->setIsValidee(true);
+
         $entityManager = $this->getDoctrine()->getManager();
         ///mise a jour des quantotes de produitsite de tous les deux sites emeteur et recepteur 
         $siteReception = $transfert->getSiteReception();
@@ -207,6 +210,7 @@ class TransfertController extends AbstractController
             // $this->updateLigneBillcard($ligne);
             $ligneTransfert = $ligne;
             $produit = $ligneTransfert->getProduitSite();
+            $produitSite=$ligneTransfert->getProduitSite();
             $date = $ligneTransfert->getTransfert()->getDate();
             $machineNumber = '';
             $deliveryNoteNumber = 'TRANSFERT VALIDE ';
@@ -222,9 +226,15 @@ class TransfertController extends AbstractController
             $totalBalance = ' ';
 
             ///verifier le code ci-dessous 
-            $ligneBillcard = new LigneBillcard($produit, $date, $machineNumber, $deliveryNoteNumber, $quantityReceived, $supllier, $customer, $idNumber, $quantitySold, $totalBalance, $site);
+            // $ligneBillcard = new LigneBillcard($produit, $date, $machineNumber, $deliveryNoteNumber, $quantityReceived, $supllier, $customer, $idNumber, $quantitySold, $totalBalance, $site);
+            $ligneStockControle = new LigneStockControle($ligneTransfert, $produitSiteReception,null);
+            // public function __construct($objetApellant, $produitSite, string $customer = null)
+            $user=$this->getUser();
+            // $site=$user->getSiteActif();
+            // $ligneStockControle->setSite($user->getSiteActif());
+
             $em = $this->getDoctrine()->getManager();
-            $em->persist($ligneBillcard);
+            $em->persist($ligneStockControle);
         }
         $siteReception->setValidationAttendu(floatval($siteReception->getValidationAttendu()) - floatval(1));
 
@@ -234,7 +244,6 @@ class TransfertController extends AbstractController
             return $this->redirectToRoute('transfert_index');
         }
 
-        $transfert->setIsValidee(true);
         $entityManager->persist($siteReception);
         $entityManager->persist($transfert);
         $entityManager->flush();

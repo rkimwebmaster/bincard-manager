@@ -4,7 +4,8 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>
-			{% block title %}BinCard Manager	{% endblock %}
+			{% block title %}BinCard Manager
+			{% endblock %}
 		</title>
 
 		<!-- Google Font: Source Sans Pro -->
@@ -30,7 +31,8 @@
 		<link
 		rel="stylesheet" href="{{asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
 		<!-- Theme style -->
-		<link	rel="stylesheet" href="{{asset('dist/css/adminlte.min.css')}}">
+		<link
+		rel="stylesheet" href="{{asset('dist/css/adminlte.min.css')}}">
 		<!-- overlayScrollbars -->
 		<link
 		rel="stylesheet" href="{{asset('plugins/overlayScrollbars/css/OverlayScrollbars.min.css')}}">
@@ -41,7 +43,6 @@
 		<link
 		rel="stylesheet" href="{{asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
 
-		
 
 		<!-- Daterange picker -->
 		<link
@@ -49,7 +50,7 @@
 		<!-- summernote -->
 		<link rel="stylesheet" href="{{asset('plugins/summernote/summernote-bs4.min.css')}}">
 
-		<link	rel="stylesheet" href="{{asset('dist/css/billstock.css')}}">
+		<link rel="stylesheet" href="{{asset('dist/css/billstock.css')}}">
 
 		<link rel="shortcut icon" href="{{asset('dist/img/billcard_logo.png')}}">
 		<link rel="apple-touch-icon" href="{{asset('dist/img/billcard_logo.png')}}">
@@ -77,7 +78,7 @@
 						</li>
 						<li class="nav-item d-none d-sm-inline-block">
 							<a href="{{url('search_billcard')}}" class="nav-link">Recherche</a>
-						</li>		
+						</li>
 						<li class="nav-item dropdown no-arrow d-none d-sm-inline-block">
 							<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								<span>Produits</span>
@@ -102,18 +103,18 @@
 									<i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
 									Liste d'audit
 								</a>
-								
+
 								<a title="Voir sur les autres sites " class="dropdown-item" href="{{url('produit_autre_site')}}">
 									<i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-									Produit autres sites 
+									Produit autres sites
 								</a>
 								<a class="dropdown-item" href="{{url('produit_site_index')}}">
 									<i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
 									Produits
 									{% if app.user %}
-									{% if app.user.siteActif %}
-										{{app.user.siteActif.designation}}
-									{% endif %}
+										{% if app.user.siteActif %}
+											{{app.user.siteActif.designation}}
+										{% endif %}
 									{% endif %}
 								</a>
 								<a class="dropdown-item" href="{{url('produit_index')}}">
@@ -128,18 +129,18 @@
 							</a>
 							<!-- Dropdown - User Information -->
 							<div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-								
+
 								{% if app.user %}
 
-								{% if app.user.siteActif %}
-								{% if app.user.siteActif.isWarehouse %}
-								<a class="dropdown-item" href="{{url('creation_entree')}}">
-									<i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-									Nouvelle entrée fournisseur
-								</a>
-								<div class="dropdown-divider"></div>
-								{% endif %}
-								{% endif %}
+									{% if app.user.siteActif %}
+										{% if app.user.siteActif.isWarehouse %}
+											<a class="dropdown-item" href="{{url('creation_entree')}}">
+												<i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+												Nouvelle entrée fournisseur
+											</a>
+											<div class="dropdown-divider"></div>
+										{% endif %}
+									{% endif %}
 
 								{% endif %}
 
@@ -168,15 +169,15 @@
 							<!-- Dropdown - User Information -->
 							<div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
 								{% if app.user %}
-								{% if app.user.siteActif %}
-								{% if not app.user.siteActif.isWarehouse %}
-								<a class="dropdown-item" href="{{url('creation_sortie')}}">
-									<i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-									Nouvelle sortie client
-								</a>
-								<div class="dropdown-divider"></div>
-								{% endif %}
-								{% endif %}
+									{% if app.user.siteActif %}
+										{% if not app.user.siteActif.isWarehouse %}
+											<a class="dropdown-item" href="{{url('creation_sortie')}}">
+												<i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+												Nouvelle sortie client
+											</a>
+											<div class="dropdown-divider"></div>
+										{% endif %}
+									{% endif %}
 								{% endif %}
 								<a class="dropdown-item" href="{{url('creation_damage')}}">
 									<i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -186,16 +187,16 @@
 									<i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
 									Liste des sorties damages
 								</a>
-							
-										<div class="dropdown-divider"></div>
+
+								<div class="dropdown-divider"></div>
 								<a class="dropdown-item" href="{{url('sortie_speciale_index')}}">
 									<i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-									Liste sorties speciales 
+									Liste sorties speciales
 								</a>
-									<div class="dropdown-divider"></div>
+								<div class="dropdown-divider"></div>
 								<a class="dropdown-item" href="{{url('sortie_index')}}">
 									<i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-									Liste des sorties clients 
+									Liste des sorties clients
 								</a>
 
 							</div>
@@ -216,15 +217,15 @@
 									<i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
 									Transferts non validés
 									{% if app.user %}
-									{% if app.user.siteActif.validationAttendu >0 %}
-										<span class=" badge badge-danger ">
-											{{app.user.siteActif.validationAttendu}}
-										</span>
+										{% if app.user.siteActif.validationAttendu > 0 %}
+											<span class=" badge badge-danger ">
+												{{app.user.siteActif.validationAttendu}}
+											</span>
 										{% else %}
 											<span class=" badge badge-success ">
-											{{app.user.siteActif.validationAttendu}}
-										</span>
-									{% endif %}
+												{{app.user.siteActif.validationAttendu}}
+											</span>
+										{% endif %}
 									{% endif %}
 								</a>
 								<div class="dropdown-divider"></div>
@@ -242,7 +243,7 @@
 									Tous les transferts
 								</a>
 							</div>
-						
+
 						</li>
 						<li class="nav-item dropdown no-arrow d-none d-sm-inline-block">
 							<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -277,12 +278,12 @@
 								<div class="dropdown-divider"></div>
 								<a title="" class="dropdown-item" href="{{url('r_annuel_general_index')}}">
 									<i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-									Lire tous les rapports generaux 
+									Lire tous les rapports generaux
 								</a>
-								
+
 							</div>
 						</li>
-						
+
 					</ul>
 
 					<!-- Right navbar links -->
@@ -293,7 +294,7 @@
 							<a class="nav-link" data-widget="navbar-search" href="#" role="button">
 								<i class="fas fa-search"></i>
 							</a>
-							<div class="navbar-search-block" >
+							<div class="navbar-search-block">
 								<form class="form-inline" action="{{url('serachByPN')}}">
 									<div class="input-group input-group-sm">
 										<input name='pn' class="form-control form-control-navbar" type="search" placeholder="Entrer le product number recherché et appuyez sur entrer." aria-label="Search">
@@ -314,12 +315,12 @@
 							<a title="Entrées en attentes de validations" class="nav-link" href="{{url('transfert_non_valide')}}">
 								<i class="far fa-bell"></i>
 								{% if app.user %}
-										{% if app.user.siteActif %}
-																			<span class="badge badge-warning navbar-badge">
+									{% if app.user.siteActif %}
+										<span class="badge badge-warning navbar-badge">
 											{{ app.user.siteActif.validationAttendu}}
-																				</span>
+										</span>
 
-										{% endif %}
+									{% endif %}
 								{% endif %}
 							</a>
 						</li>
@@ -353,513 +354,456 @@
 											<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
 											Administration
 										</a>
-										{% endif %}
-										<div class="dropdown-divider"></div>
-										<a class="dropdown-item" href="{{url('app_logout')}}">
-											<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-											Déconnexion
-										</a>
-									</div>
-								</li>
-							{% endif %}
-
-						</ul>
-					</nav>
-					<!-- /.navbar -->
-
-					<!-- Main Sidebar Container -->
-					<aside
-						class="main-sidebar sidebar-dark-primary elevation-4">
-						<!-- Brand Logo -->
-						<a href="{{url('accueil')}}" class="brand-link">
-							<img src="{{asset('dist/img/billcard_logo.png')}}" alt="BinCard Manager" class="brand-image img-circle elevation-3" style="opacity: .8">
-							<span class="brand-text font-weight-light">Gesti<span class="text-danger">o</span>n de st<span class="text-danger">o</span>cks
-							</span>
-						</a>
-
-						<!-- Sidebar -->
-						<div class="sidebar">
-							{% if app.user %}
-								<!-- Sidebar user panel (optional) -->
-								<div class="user-panel mt-3 pb-3 mb-3 d-flex">
-									<div class="image">
-										<img src="{{asset('dist/img/profilavatar.jpg')}}" class="img-circle elevation-2" alt="User Image">
-									</div>
-									<div title='Déconnectez-vous!' class="info">
-										<a href="{{url('app_logout')}}" class="d-block">
-											{{app.user}}
-											est connecté(e)
-										</a>
-									</div>
+									{% endif %}
+									<div class="dropdown-divider"></div>
+									<a class="dropdown-item" href="{{url('app_logout')}}">
+										<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+										Déconnexion
+									</a>
 								</div>
-							{% endif %}
-							<!-- SidebarSearch Form -->
-							<div class="form-inline">
-								<div class="input-group" data-widget="sidebar-search">
-									<input class="form-control form-control-sidebar" type="search" placeholder="Entrer la fonctionnalité recherchée." aria-label="Search">
-									<div class="input-group-append">
-										<button class="btn btn-sidebar">
-											<i class="fas fa-search fa-fw"></i>
-										</button>
-									</div>
+							</li>
+						{% endif %}
+
+					</ul>
+				</nav>
+				<!-- /.navbar -->
+
+				<!-- Main Sidebar Container -->
+				<aside
+					class="main-sidebar sidebar-dark-primary elevation-4">
+					<!-- Brand Logo -->
+					<a href="{{url('accueil')}}" class="brand-link">
+						<img src="{{asset('dist/img/billcard_logo.png')}}" alt="BinCard Manager" class="brand-image img-circle elevation-3" style="opacity: .8">
+						<span class="brand-text font-weight-light">Gesti<span class="text-danger">o</span>n de st<span class="text-danger">o</span>cks
+						</span>
+					</a>
+
+					<!-- Sidebar -->
+					<div class="sidebar">
+						{% if app.user %}
+							<!-- Sidebar user panel (optional) -->
+							<div class="user-panel mt-3 pb-3 mb-3 d-flex">
+								<div class="image">
+									<img src="{{asset('dist/img/profilavatar.jpg')}}" class="img-circle elevation-2" alt="User Image">
+								</div>
+								<div title='Déconnectez-vous!' class="info">
+									<a href="{{url('app_logout')}}" class="d-block">
+										{{app.user}}
+										est connecté(e)
+									</a>
 								</div>
 							</div>
-
-							<!-- Sidebar Menu -->
-							<nav class="mt-2">
-								<ul
-									class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-									
-									{#% if is_granted('ROLE_ADMIN') %#}
-									<!-- Add icons to the links using the .nav-icon class																																																																               with font-awesome or any other icon font library -->
-									<li class="nav-item menu-close">
-										<a title="Parametrez l'application" href="#" class="nav-link active">
-											<i class="nav-icon fas fa-cubes"></i>
-											<p>
-												Produits
-												<i class="right fas fa-angle-left"></i>
-											</p>
-										</a>
-										<ul class="nav nav-treeview">
-											<li class="nav-item">
-												<a href="{{url('app_register')}}" class="nav-link ">
-													<i class="fa fa-user-plus nav-icon"></i>
-													<p>
-														Stock Alerte </p>
-												</a>
-											</li>
-											<li class="nav-item">
-												<a href="{{url('user_index')}}" class="nav-link ">
-													<i class="fa fa-users nav-icon"></i>
-													<p>
-														Nouvel Audit </p>
-												</a>
-											</li>
-											<li class="nav-item">
-												<a href="{{url('controle_index')}}" class="nav-link ">
-													<i class="fab fa-yelp nav-icon"></i>
-													<p>Visualiser audits </p>
-												</a>
-											</li>
-											<li class="nav-item">
-												<a href="" class="nav-link">
-													<i class="fas fa-paper-plane nav-icon"></i>
-													<p>Produits tous sites</p>
-												</a>
-											</li>
-											<li class="nav-item">
-												<a href="{{url('produit_site_index')}}" class="nav-link">
-													<i class="fab fa-linux nav-icon"></i>
-													<p>Produits locaux</p>
-												</a>
-											</li>
-											<li class="nav-item">
-												<a href="{{url('produit_index')}}" class="nav-link">
-													<i class="far fa-circle nav-icon"></i>
-													<p>Tous les produits </p>
-												</a>
-											</li>
-										</ul>
-									</li>
-									<li class="nav-item menu-open">
-										<a href="#" class="nav-link active">
-											<i class="nav-icon fas fa-tachometer-alt"></i>
-											<p>
-												Entrées
-												<i class="right fas fa-angle-left"></i>
-											</p>
-										</a>
-										<ul class="nav nav-treeview">
-											<li class="nav-item">
-												<a href="{{url('entree_index')}}" class="nav-link ">
-													<i class="far fa-user nav-icon"></i>
-													<p>Entrées founisseurs
-													</p>
-												</a>
-											</li>
-											<li class="nav-item">
-												<a href="{{url('transfert_index')}}" class="nav-link ">
-													<i class="far fa-user nav-icon"></i>
-													<p>Entrées reuses 
-													</p>
-												</a>
-											</li>
-											
-										</ul>
-									</li>
-									<li class="nav-item menu-open">
-										<a href="#" class="nav-link active">
-											<i class="nav-icon fas fa-tachometer-alt"></i>
-											<p>
-												Sorties
-												<i class="right fas fa-angle-left"></i>
-											</p>
-										</a>
-										<ul class="nav nav-treeview">
-											<li class="nav-item">
-												<a title="Transferts vers les clients" href="{{url('transfert_index')}}" class="nav-link ">
-													<i class="far fa-user nav-icon"></i>
-													<p>Damages 
-													</p>
-												</a>
-											</li>
-											<li class="nav-item">
-												<a href="{{url('sortie_index')}}" class="nav-link ">
-													<i class="far fa-user nav-icon"></i>
-													<p>Sorties spéciales 
-													</p>
-												</a>
-											</li>
-											
-										</ul>
-									</li>
-									<li class="nav-item menu-open">
-										<a href="#" class="nav-link active">
-											<i class="nav-icon fas fa-tachometer-alt"></i>
-											<p>
-												Transferts
-												<i class="right fas fa-angle-left"></i>
-											</p>
-										</a>
-										<ul class="nav nav-treeview">
-											<li class="nav-item">
-												<a title="Transferts vers les clients" href="{{url('transfert_index')}}" class="nav-link ">
-													<i class="far fa-user nav-icon"></i>
-													<p>Nouveau Transferts
-													</p>
-												</a>
-											</li>
-											<li class="nav-item">
-												<a href="{{url('sortie_index')}}" class="nav-link ">
-													<i class="far fa-user nav-icon"></i>
-													<p>Transfert émis 
-													</p>
-												</a>
-											</li>
-											<li class="nav-item">
-												<a href="{#{url('creation_damage_sortie')}#}" class="nav-link ">
-													<i class="far fa-user nav-icon"></i>
-													<p>Transferts non vallidés 
-													</p>
-												</a>
-											</li>
-										</ul>
-									</li>
-									<li class="nav-item menu-open">
-										<a href="#" class="nav-link active">
-											<i class="nav-icon fas fa-tachometer-alt"></i>
-											<p>
-												Rapports
-												<i class="right fas fa-angle-left"></i>
-											</p>
-										</a>
-										<ul class="nav nav-treeview">
-											<li class="nav-item">
-												<a href="{{url('creation_r_mensuel')}}" class="nav-link ">
-													<i class="far fa-user nav-icon"></i>
-													<p>Mensuels  GGG
-													</p>
-												</a>
-											</li>
-											<li class="nav-item">
-												<a href="{{url('transfert_index')}}" class="nav-link ">
-													<i class="far fa-user nav-icon"></i>
-													<p>Annuel 
-													</p>
-												</a>
-											</li>
-											
-										</ul>
-									</li>
-									<li class="nav-item menu-close">
-										<a title="Parametrez l'application" href="#" class="nav-link active">
-											<i class="nav-icon fas fa-cubes"></i>
-											<p>
-												Configurations
-												<i class="right fas fa-angle-left"></i>
-											</p>
-										</a>
-										<ul class="nav nav-treeview">
-											<li class="nav-item">
-												<a href="{{url('app_register')}}" class="nav-link ">
-													<i class="fa fa-user-plus nav-icon"></i>
-													<p>
-														Nouvel Utilisateurs</p>
-												</a>
-											</li>
-											<li class="nav-item">
-												<a href="{{url('user_index')}}" class="nav-link ">
-													<i class="fa fa-users nav-icon"></i>
-													<p>
-														Liste Utilisateurs</p>
-												</a>
-											</li>
-											<li class="nav-item">
-												<a href="{{url('produit_new')}}" class="nav-link ">
-													<i class="fab fa-yelp nav-icon"></i>
-													<p>Produits</p>
-												</a>
-											</li>
-											<li class="nav-item">
-												<a href="{{url('client_new')}}" class="nav-link">
-													<i class="fas fa-paper-plane nav-icon"></i>
-													<p>Clients</p>
-												</a>
-											</li>
-											<li class="nav-item">
-												<a href="{{url('fournisseur_new')}}" class="nav-link">
-													<i class="fab fa-linux nav-icon"></i>
-													<p>Fournisseur</p>
-												</a>
-											</li>
-											<li class="nav-item">
-												<a href="{{url('site_new')}}" class="nav-link">
-													<i class="far fa-circle nav-icon"></i>
-													<p>Sites</p>
-												</a>
-											</li>
-											<li class="nav-item">
-												<a href="{{url('ville_new')}}" class="nav-link">
-													<i class="fab fa-modx nav-icon"></i>
-													<p>Villes</p>
-												</a>
-											</li>
-										</ul>
-									</li>
-									{#% endif %#}
-									
-									<li class="nav-item">
-										<a href="{{url('site_index')}}" class="nav-link">
-											<i class="nav-icon fas fa-th"></i>
-											<p>
-												Liste des sites
-												<span class="right badge badge-danger">New</span>
-											</p>
-										</a>
-									</li>
-									<li class="nav-item">
-										<a href="{{url('ville_index')}}" class="nav-link">
-											<i class="nav-icon fas fa-th"></i>
-											<p>
-												Liste des villes
-												<span class="right badge badge-danger">New</span>
-											</p>
-										</a>
-									</li>
-									<li class="nav-item">
-										<a href="{{url('fournisseur_index')}}" class="nav-link">
-											<i class="nav-icon fas fa-th"></i>
-											<p>
-												Liste des fournisseurs
-												<span class="right badge badge-danger">New</span>
-											</p>
-										</a>
-									</li>
-									<li class="nav-item">
-										<a href="{{url('client_index')}}" class="nav-link">
-											<i class="nav-icon fas fa-th"></i>
-											<p>
-												Liste des clients
-												<span class="right badge badge-danger">New</span>
-											</p>
-										</a>
-									</li>
-									<li class="nav-item">
-										<a href="{{url('site_index')}}" class="nav-link">
-											<i class="nav-icon fas fa-th"></i>
-											<p>
-												Liste des warehouses
-												<span class="right badge badge-danger">New</span>
-											</p>
-										</a>
-									</li>
-									<li class="nav-item">
-										<a href="{{url('produit_index')}}" class="nav-link">
-											<i class="nav-icon fas fa-th"></i>
-											<p>
-												Liste des produits
-												<span class="right badge badge-danger">New</span>
-											</p>
-										</a>
-									</li>
-									<li class="nav-item">
-										<a href="{{url('user_index')}}" class="nav-link">
-											<i class="nav-icon fas fa-th"></i>
-											<p>
-												Utilisateurs actifs
-												<span class="right badge badge-danger">New</span>
-											</p>
-										</a>
-									</li>
-									<li class="nav-item">
-										<a href="{{url('user_index')}}" class="nav-link">
-											<i class="nav-icon fas fa-th"></i>
-											<p>
-												Liste des utilisateurs
-												<span class="right badge badge-danger">New</span>
-											</p>
-										</a>
-									</li>
-								</ul>
-							</nav>
-							<!-- /.sidebar-menu -->
+						{% endif %}
+						<!-- SidebarSearch Form -->
+						<div class="form-inline">
+							<div class="input-group" data-widget="sidebar-search">
+								<input class="form-control form-control-sidebar" type="search" placeholder="Entrer la fonctionnalité recherchée." aria-label="Search">
+								<div class="input-group-append">
+									<button class="btn btn-sidebar">
+										<i class="fas fa-search fa-fw"></i>
+									</button>
+								</div>
+							</div>
 						</div>
-						<!-- /.sidebar -->
-					</body>
-				</html>
-			</body>
+
+						<!-- Sidebar Menu -->
+						<nav class="mt-2">
+							<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
+								{#% if is_granted('ROLE_ADMIN') %#}
+								<!-- Add icons to the links using the .nav-icon class																																																																               with font-awesome or any other icon font library -->
+									<li class="nav-item menu-close"> <a title="Parametrez l'application" href="#" class="nav-link active">
+										<i class="nav-icon fas fa-cubes"></i>
+										<p>
+											Produits
+											<i class="right fas fa-angle-left"></i>
+										</p>
+									</a>
+									<ul class="nav nav-treeview">
+										<li class="nav-item">
+											<a href="{{url('app_register')}}" class="nav-link ">
+												<i class="fa fa-user-plus nav-icon"></i>
+												<p>
+													Stock Alerte
+												</p>
+											</a>
+										</li>
+										<li class="nav-item">
+											<a href="{{url('user_index')}}" class="nav-link ">
+												<i class="fa fa-users nav-icon"></i>
+												<p>
+													Nouvel Audit
+												</p>
+											</a>
+										</li>
+										<li class="nav-item">
+											<a href="{{url('controle_index')}}" class="nav-link ">
+												<i class="fab fa-yelp nav-icon"></i>
+												<p>Visualiser audits
+												</p>
+											</a>
+										</li>
+										<li class="nav-item">
+											<a href="" class="nav-link">
+												<i class="fas fa-paper-plane nav-icon"></i>
+												<p>Produits tous sites</p>
+											</a>
+										</li>
+										<li class="nav-item">
+											<a href="{{url('produit_site_index')}}" class="nav-link">
+												<i class="fab fa-linux nav-icon"></i>
+												<p>Produits locaux</p>
+											</a>
+										</li>
+										<li class="nav-item">
+											<a href="{{url('produit_index')}}" class="nav-link">
+												<i class="far fa-circle nav-icon"></i>
+												<p>Tous les produits
+												</p>
+											</a>
+										</li>
+									</ul>
+								</li>
+								<li class="nav-item menu-open">
+									<a href="#" class="nav-link active">
+										<i class="nav-icon fas fa-tachometer-alt"></i>
+										<p>
+											Entrées
+											<i class="right fas fa-angle-left"></i>
+										</p>
+									</a>
+									<ul class="nav nav-treeview">
+										<li class="nav-item">
+											<a href="{{url('entree_index')}}" class="nav-link ">
+												<i class="far fa-user nav-icon"></i>
+												<p>Entrées founisseurs
+												</p>
+											</a>
+										</li>
+										<li class="nav-item">
+											<a href="{{url('transfert_index')}}" class="nav-link ">
+												<i class="far fa-user nav-icon"></i>
+												<p>Entrées reuses
+												</p>
+											</a>
+										</li>
+
+									</ul>
+								</li>
+								<li class="nav-item menu-open">
+									<a href="#" class="nav-link active">
+										<i class="nav-icon fas fa-tachometer-alt"></i>
+										<p>
+											Sorties
+											<i class="right fas fa-angle-left"></i>
+										</p>
+									</a>
+									<ul class="nav nav-treeview">
+										<li class="nav-item">
+											<a title="Transferts vers les clients" href="{{url('transfert_index')}}" class="nav-link ">
+												<i class="far fa-user nav-icon"></i>
+												<p>Damages
+												</p>
+											</a>
+										</li>
+										<li class="nav-item">
+											<a href="{{url('sortie_index')}}" class="nav-link ">
+												<i class="far fa-user nav-icon"></i>
+												<p>Sorties spéciales
+												</p>
+											</a>
+										</li>
+
+									</ul>
+								</li>
+								<li class="nav-item menu-open">
+									<a href="#" class="nav-link active">
+										<i class="nav-icon fas fa-tachometer-alt"></i>
+										<p>
+											Transferts
+											<i class="right fas fa-angle-left"></i>
+										</p>
+									</a>
+									<ul class="nav nav-treeview">
+										<li class="nav-item">
+											<a title="Transferts vers les clients" href="{{url('transfert_index')}}" class="nav-link ">
+												<i class="far fa-user nav-icon"></i>
+												<p>Nouveau Transferts
+												</p>
+											</a>
+										</li>
+										<li class="nav-item">
+											<a href="{{url('sortie_index')}}" class="nav-link ">
+												<i class="far fa-user nav-icon"></i>
+												<p>Transfert émis
+												</p>
+											</a>
+										</li>
+										<li class="nav-item">
+											<a href="{#{url('creation_damage_sortie')}#}" class="nav-link ">
+												<i class="far fa-user nav-icon"></i>
+												<p>Transferts non vallidés
+												</p>
+											</a>
+										</li>
+									</ul>
+								</li>
+								<li class="nav-item menu-open">
+									<a href="#" class="nav-link active">
+										<i class="nav-icon fas fa-tachometer-alt"></i>
+										<p>
+											Rapports
+											<i class="right fas fa-angle-left"></i>
+										</p>
+									</a>
+									<ul class="nav nav-treeview">
+										<li class="nav-item">
+											<a href="{{url('creation_r_mensuel')}}" class="nav-link ">
+												<i class="far fa-user nav-icon"></i>
+												<p>Mensuels  GGG
+												</p>
+											</a>
+										</li>
+										<li class="nav-item">
+											<a href="{{url('transfert_index')}}" class="nav-link ">
+												<i class="far fa-user nav-icon"></i>
+												<p>Annuel
+												</p>
+											</a>
+										</li>
+
+									</ul>
+								</li>
+								<li class="nav-item menu-close">
+									<a title="Parametrez l'application" href="#" class="nav-link active">
+										<i class="nav-icon fas fa-cubes"></i>
+										<p>
+											Configurations
+											<i class="right fas fa-angle-left"></i>
+										</p>
+									</a>
+									<ul class="nav nav-treeview">
+										<li class="nav-item">
+											<a href="{{url('app_register')}}" class="nav-link ">
+												<i class="fa fa-user-plus nav-icon"></i>
+												<p>
+													Nouvel Utilisateurs</p>
+											</a>
+										</li>
+										<li class="nav-item">
+											<a href="{{url('user_index')}}" class="nav-link ">
+												<i class="fa fa-users nav-icon"></i>
+												<p>
+													Liste Utilisateurs</p>
+											</a>
+										</li>
+										<li class="nav-item">
+											<a href="{{url('produit_new')}}" class="nav-link ">
+												<i class="fab fa-yelp nav-icon"></i>
+												<p>Produits</p>
+											</a>
+										</li>
+										<li class="nav-item">
+											<a href="{{url('client_new')}}" class="nav-link">
+												<i class="fas fa-paper-plane nav-icon"></i>
+												<p>Clients</p>
+											</a>
+										</li>
+										<li class="nav-item">
+											<a href="{{url('fournisseur_new')}}" class="nav-link">
+												<i class="fab fa-linux nav-icon"></i>
+												<p>Fournisseur</p>
+											</a>
+										</li>
+										<li class="nav-item">
+											<a href="{{url('site_new')}}" class="nav-link">
+												<i class="far fa-circle nav-icon"></i>
+												<p>Sites</p>
+											</a>
+										</li>
+										<li class="nav-item">
+											<a href="{{url('ville_new')}}" class="nav-link">
+												<i class="fab fa-modx nav-icon"></i>
+												<p>Villes</p>
+											</a>
+										</li>
+									</ul>
+								</li>
+								{#% endif %#}
+
+								<li class="nav-item">
+									<a href="{{url('site_index')}}" class="nav-link">
+										<i class="nav-icon fas fa-th"></i>
+										<p>
+											Liste des sites
+											<span class="right badge badge-danger">New</span>
+										</p>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a href="{{url('ville_index')}}" class="nav-link">
+										<i class="nav-icon fas fa-th"></i>
+										<p>
+											Liste des villes
+											<span class="right badge badge-danger">New</span>
+										</p>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a href="{{url('fournisseur_index')}}" class="nav-link">
+										<i class="nav-icon fas fa-th"></i>
+										<p>
+											Liste des fournisseurs
+											<span class="right badge badge-danger">New</span>
+										</p>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a href="{{url('client_index')}}" class="nav-link">
+										<i class="nav-icon fas fa-th"></i>
+										<p>
+											Liste des clients
+											<span class="right badge badge-danger">New</span>
+										</p>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a href="{{url('site_index')}}" class="nav-link">
+										<i class="nav-icon fas fa-th"></i>
+										<p>
+											Liste des warehouses
+											<span class="right badge badge-danger">New</span>
+										</p>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a href="{{url('produit_index')}}" class="nav-link">
+										<i class="nav-icon fas fa-th"></i>
+										<p>
+											Liste des produits
+											<span class="right badge badge-danger">New</span>
+										</p>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a href="{{url('user_index')}}" class="nav-link">
+										<i class="nav-icon fas fa-th"></i>
+										<p>
+											Utilisateurs actifs
+											<span class="right badge badge-danger">New</span>
+										</p>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a href="{{url('user_index')}}" class="nav-link">
+										<i class="nav-icon fas fa-th"></i>
+										<p>
+											Liste des utilisateurs
+											<span class="right badge badge-danger">New</span>
+										</p>
+									</a>
+								</li>
+							</ul>
+						</nav>
+						<!-- /.sidebar-menu -->
+					</div>
+					<!-- /.sidebar -->
+				</body>
+			</html>
 		</body>
 	</html>
-</aside>
-
-<!-- Content Wrapper. Contains page content -->
-<div
-	class="content-wrapper">
-	<!-- Content Header (Page header) -->
-	<div class="content-header">
-		<div class="container-fluid">
-			<div class="row mb-2">
-				<div class="col-sm-8">
-					<h1 class="m-0">Bin<span class="text-danger">C</span>ard Manager
-						{% if app.user %}
-							{% if app.user.siteActif %} <span class="fa fa-angle-double-right"> </span>
-								{{app.user.siteActif.designation }}
-								{% if app.user.siteActif.isWarehouse %}
-									<span title="ce site est un warehouse" class="fa fa-tags"></span>
-								{% endif %}
-							{% endif %}
+</body></html></aside><!-- Content Wrapper. Contains page content --><divclass="content-wrapper"><!-- Content Header (Page header) --><div class="content-header">
+<div class="container-fluid">
+	<div class="row mb-2">
+		<div class="col-sm-8">
+			<h1 class="m-0">Bin<span class="text-danger">C</span>ard Manager
+				{% if app.user %}
+					{% if app.user.siteActif %}
+						<span class="fa fa-angle-double-right"></span>
+						{{app.user.siteActif.designation }}
+						{% if app.user.siteActif.isWarehouse %}
+							<span title="ce site est un warehouse" class="fa fa-tags"></span>
 						{% endif %}
-						{% block lesite %} <span class="fa fa-angle-double-right"> </span> 
-						Gestion de stocks 
+					{% endif %}
+				{% endif %}
+				{% block lesite %}
+					<span class="fa fa-angle-double-right"></span>
+					Gestion de stocks
+				{% endblock %}
+			</h1>
+		</div>
+		<!-- /.col -->
+		<div class="col-sm-4">
+			<div class="btn-group float-sm-right">
+				{% block lesboutons %}
+					<a title="Retour à la liste " class="btn btn-info">
+						<i class="fa fa-reply-all"></i>
+					</a>
+					<a type="button" title="Ajouter nouveau " class="btn btn-info">
+						<i class="fas fa-plus-circle"></i>
+					</a>
+					<a type="button" title="Modifier élément  " class="btn btn-info">
+						<i class="fas fa-edit"></i>
+					</a>
+					<a type="button" title="Supprimer élément" class="btn btn-info">
+						<i class="fas fa-trash"></i>
+					</a>
+				{% endblock %}
+				<a type="button" title="Imprimer la page " onclick="window.print()" class="btn btn-info">
+					<i class="fas fa-print"></i>
+				</a>
+			</div>
+		</div>
+		<!-- /.col -->
+	</div>
+	<!-- /.row -->
+</div>
+<!-- /.container-fluid --></div><!-- /.content-header --><section class="content">
+<div class="container-fluid">
+	{% for label, flashes in app.session.flashbag.all %}
+		{% for flash in flashes %}
+			<div class="alert alert-{{ label }} alert-dismissible fade show" role="alert">
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+				<strong>
+					<!--i class="icon fas fa-ban"></i-->
+					{{ label|title }}
+					!</strong>
+				{{ flash }}
+			</div>
+		{% endfor %}
+	{% endfor %}
+</div></section><!-- Main content --><section class="content">
+<div
+	class="container-fluid">
+	<!-- Main row -->
+	<div class="row">
+		<div class="col-12">
+			<div class="card card-primary card-outline ">
+				<div class="card-header">
+					<h1 class="card-title">
+						{% block titre %}
+							Liste des sorties
 						{% endblock %}
 					</h1>
 				</div>
-				<!-- /.col -->
-				<div class="col-sm-4">
-					<div class="btn-group float-sm-right">
-						{% block lesboutons %}
-							<a title="Retour à la liste " class="btn btn-info">
-								<i class="fa fa-reply-all"></i>
-							</a>
-							<a type="button" title="Ajouter nouveau " class="btn btn-info">
-								<i class="fas fa-plus-circle"></i>
-							</a>
-							<a type="button" title="Modifier élément  " class="btn btn-info">
-								<i class="fas fa-edit"></i>
-							</a>
-							<a type="button" title="Supprimer élément" class="btn btn-info">
-								<i class="fas fa-trash"></i>
-							</a>
-						{% endblock %}
-						<a type="button" title="Imprimer la page " onclick="window.print()" class="btn btn-info">
-							<i class="fas fa-print"></i>
-						</a>
+				<!-- /.card-header -->
+				<div class="card-body"> {% block body %}{% endblock %}
 					</div>
+					<!-- /.card-body -->
 				</div>
-				<!-- /.col -->
+				<!-- /.card -->
 			</div>
-			<!-- /.row -->
+			<!-- /.row (main row) -->
 		</div>
 		<!-- /.container-fluid -->
-	</div>
-	<!-- /.content-header -->
-	<section class="content">
-		<div class="container-fluid">
-			{% for label, flashes in app.session.flashbag.all %}
-				{% for flash in flashes %}
-					<div class="alert alert-{{ label }} alert-dismissible fade show" role="alert">
-						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-						<strong>
-							<!--i class="icon fas fa-ban"></i-->
-							{{ label|title }}
-							!</strong>
-						{{ flash }}
-					</div>
-				{% endfor %}
-			{% endfor %}
-		</div>
 	</section>
-	<!-- Main content -->
-	<section class="content">
-		<div
-			class="container-fluid">
-			<!-- Main row -->
-			<div class="row">
-				<div class="col-12">
-					<div class="card card-primary card-outline ">
-						<div class="card-header">
-							<h1 class="card-title">
-								{% block titre %}
-									Liste des sorties
-								{% endblock %}
-							</h1>
-						</div>
-						<!-- /.card-header -->
-						<div class="card-body"> {% block body %}{% endblock %}
-							</div>
-							<!-- /.card-body -->
-						</div>
-						<!-- /.card -->
-					</div>
-					<!-- /.row (main row) -->
-				</div>
-				<!-- /.container-fluid -->
-			</section>
-			<!-- /.content -->
-		</body>
-	</body>
-</body></body></html></div><!-- /.content-wrapper -->
-<footer class="main-footer">
-<strong>Copyright &copy; 2022<a href="https://webtronblue.com">WebTronBlue Inc</a>.</strong>
-All rights reserved.<div class="float-right d-none d-sm-inline-block"><b>Version</b>0.9.0</div>
-</footer><!-- Control Sidebar --><asideclass="control-sidebarcontrol-sidebar-dark">
-<!-- Control sidebar content goes here --></aside><!-- /.control-sidebar -->
-</body></html></div><!-- ./wrapper --><!-- jQuery -->
-<script src="{{asset('plugins/jquery/jquery.min.js')}}"></script>
-<!-- jQuery UI 1.11.4 --><script src="{{asset('plugins/jquery-ui/jquery-ui.min.js')}}">
-</script><!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-<script>$.widget.bridge('uibutton', $.ui.button)</script><!-- Bootstrap 4 -->
-<script src="{{asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-<!-- Select2 --><script src="{{asset('plugins/select2/js/select2.full.min.js')}}"></script>
-<!-- ChartJS --><script src="{{asset('plugins/chart.js/Chart.min.js')}}"></script>
-<!-- Sparkline -->
-<script src="{{asset('plugins/sparklines/sparkline.js')}}"></script>
-<!-- JQVMap --><script src="{{asset('plugins/jqvmap/jquery.vmap.min.js')}}"></script>
-<script src="{{asset('plugins/jqvmap/maps/jquery.vmap.usa.js')}}"></script>
-<!-- jQuery Knob Chart --><script src="{{asset('plugins/jquery-knob/jquery.knob.min.js')}}"></script>
-<!-- daterangepicker --><script src="{{asset('plugins/moment/moment.min.js')}}"></script>
-<script src="{{asset('plugins/daterangepicker/daterangepicker.js')}}"></script>
-<!-- Tempusdominus Bootstrap 4 --><script src="{{asset('plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')}}"></script>
-<!-- Summernote --><script src="{{asset('plugins/summernote/summernote-bs4.min.js')}}"></script>
-<!-- overlayScrollbars --><script src="{{asset('plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
-<!-- AdminLTE App --><script src="{{asset('dist/js/adminlte.js')}}"></script>
-<!--  insertion des datatables --><!-- DataTables  & Plugins -->
-<script src="{{asset('plugins/datatables/jquery.dataTables.min.js')}}"></script>
-<script src="{{asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
-<script src="{{asset('plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
-<script src="{{asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
-<script src="{{asset('plugins/datatables-buttons/js/dataTables.buttons.min.js')}}"></script>
-<script src="{{asset('plugins/datatables-buttons/js/buttons.bootstrap4.min.js')}}"></script>
-<script src="{{asset('plugins/jszip/jszip.min.js')}}"></script>
-<script src="{{asset('plugins/pdfmake/pdfmake.min.js')}}"></script>
-<script src="{{asset('plugins/pdfmake/vfs_fonts.js')}}"></script>
-<script src="{{asset('plugins/datatables-buttons/js/buttons.html5.min.js')}}"></script>
-<script src="{{asset('plugins/datatables-buttons/js/buttons.print.min.js')}}"></script>
-<script src="{{asset('plugins/datatables-buttons/js/buttons.colVis.min.js')}}"></script>
-<!-- AdminLTE for demo purposes --><script src="{{asset('dist/js/demo.js')}}"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="{{asset('dist/js/pages/dashboard.js')}}"></script>
-<script src="{{asset('js/imbrication.js')}}"></script><!-- Page specific script -->
-<script>
-			$(function () { // Initialize Select2 Elements
+	<!-- /.content -->
+</body></body></body></body></html></div><!-- /.content-wrapper --><footer class="main-footer"><strong>Copyright &copy; 2022<a href="https://webtronblue.com">WebTronBlue Inc</a>.</strong>All rights reserved.<div class="float-right d-none d-sm-inline-block"><b>Version</b>0.9.0</div></footer><!-- Control Sidebar --><asideclass="control-sidebarcontrol-sidebar-dark"><!-- Control sidebar content goes here --></aside><!-- /.control-sidebar --></body></html></div><!-- ./wrapper --><!-- jQuery --><script src="{{asset('plugins/jquery/jquery.min.js')}}"></script><!-- jQuery UI 1.11.4 --><script src="{{asset('plugins/jquery-ui/jquery-ui.min.js')}}"></script><!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip --><script>$.widget.bridge('uibutton', $.ui.button)</script><!-- Bootstrap 4 --><script src="{{asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script><!-- Select2 --><script src="{{asset('plugins/select2/js/select2.full.min.js')}}"></script><!-- ChartJS --><script src="{{asset('plugins/chart.js/Chart.min.js')}}"></script><!-- Sparkline --><script src="{{asset('plugins/sparklines/sparkline.js')}}"></script><!-- JQVMap --><script src="{{asset('plugins/jqvmap/jquery.vmap.min.js')}}"></script><script src="{{asset('plugins/jqvmap/maps/jquery.vmap.usa.js')}}"></script><!-- jQuery Knob Chart --><script src="{{asset('plugins/jquery-knob/jquery.knob.min.js')}}"></script><!-- daterangepicker --><script src="{{asset('plugins/moment/moment.min.js')}}"></script><script src="{{asset('plugins/daterangepicker/daterangepicker.js')}}"></script><!-- Tempusdominus Bootstrap 4 --><script src="{{asset('plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')}}"></script><!-- Summernote --><script src="{{asset('plugins/summernote/summernote-bs4.min.js')}}"></script><!-- overlayScrollbars --><script src="{{asset('plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script><!-- AdminLTE App --><script src="{{asset('dist/js/adminlte.js')}}"></script><!--  insertion des datatables --><!-- DataTables  & Plugins --><script src="{{asset('plugins/datatables/jquery.dataTables.min.js')}}"></script><script src="{{asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script><script src="{{asset('plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script><script src="{{asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script><script src="{{asset('plugins/datatables-buttons/js/dataTables.buttons.min.js')}}"></script><script src="{{asset('plugins/datatables-buttons/js/buttons.bootstrap4.min.js')}}"></script><script src="{{asset('plugins/jszip/jszip.min.js')}}"></script><script src="{{asset('plugins/pdfmake/pdfmake.min.js')}}"></script><script src="{{asset('plugins/pdfmake/vfs_fonts.js')}}"></script><script src="{{asset('plugins/datatables-buttons/js/buttons.html5.min.js')}}"></script><script src="{{asset('plugins/datatables-buttons/js/buttons.print.min.js')}}"></script><script src="{{asset('plugins/datatables-buttons/js/buttons.colVis.min.js')}}"></script><!-- AdminLTE for demo purposes --><script src="{{asset('dist/js/demo.js')}}"></script><!-- AdminLTE dashboard demo (This is only for demo purposes) --><script src="{{asset('dist/js/pages/dashboard.js')}}"></script><script src="{{asset('js/imbrication.js')}}"></script><!-- Page specific script --><script>$(function () { // Initialize Select2 Elements
 $('.select2').select2()
 
 // Initialize Select2 Elements
 $('.select2bs4').select2({theme: 'bootstrap4'})
-});
-		</script>
-
-<script>$(function () {
+});</script><script>$(function () {
 $("#example1").DataTable({
 "responsive": true,
 "lengthChange": false,
@@ -882,5 +826,4 @@ $('#example2').DataTable({
 "autoWidth": false,
 "responsive": true
 });
-});</script><!-- le script pour les dates daterange et autre -->
-<script>$('.js-example-basic-single').select2({placeholder: 'Choisissez un agent', allowClear: true, language: 'fr', theme: 'bootstrap4'});</script>{% block javascripts %}{% endblock %}</body></html>
+});</script><!-- le script pour les dates daterange et autre --><script>$('.js-example-basic-single').select2({placeholder: 'Choisissez un agent', allowClear: true, language: 'fr', theme: 'bootstrap4'});</script>{% block javascripts %}{% endblock %}</body> </html>

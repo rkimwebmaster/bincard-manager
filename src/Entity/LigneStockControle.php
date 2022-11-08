@@ -229,16 +229,21 @@ class LigneStockControle
 
         /// traiter le cas des transfert, validation transfert 
         if (get_class($objetApellant) == LigneTransfert::class) {
+            // dd('dans le debut de ligne transfert');
+
             $this->date = $objetApellant->getTransfert()->getDate();
             $this->ijdNumber=$objetApellant->getTransfert()->getCode();
             //mise a jour ce 8 mars 
             $this->customer=$objetApellant->getTransfert()->getSiteReception();
             if ($objetApellant->getTransfert()->getIsValidee()) {
-                $this->deliveryNoteNumber = 'TRANSFERT VALIDE ';
+                // dd('dans la validation');
+                $this->deliveryNoteNumber = 'TRANSFERT RECU ';
                 $this->quantityReceived=$objetApellant->getQuantite();
                 $this->supplier = $objetApellant->getTransfert()->getSiteEnvoie()->getDesignation();
                 //bien verifier lors de test 
                 $this->setNumeroDNN(8);
+                // $this->setSite($objetApellant->getTransfert()->getSiteReception());
+                // dd($produitSite->getSite());
             } else {
                 $this->deliveryNoteNumber = 'TRANSFERT NON VALIDE ';
                 $this->quantitySold = $objetApellant->getQuantite();
