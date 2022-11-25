@@ -27,7 +27,7 @@
 				<th>Customer</th>
 				<th>Id #</th>
 				<th>Qty Sold</th>
-				<th>Total Balance</th>
+				{# <th>Total Balance</th> #}
 			</tr>
 		</thead>
 				<tfoot>
@@ -40,7 +40,7 @@
 				<th>Customer</th>
 				<th>Id #</th>
 				<th>Qty Sold</th>
-				<th>Total Balance</th>
+				{# <th>Total Balance</th> #}
 			</tr>
 		</tfoot>
 		<tbody>
@@ -64,11 +64,11 @@
 								{{ ligne_billcard.quantitySold }}
 						{% endif %}
 					</td>
-					<td>{{ ligne_billcard.totalBalance }}</td>
+					{# <td>{{ ligne_billcard.totalBalance }}</td> #}
 				</tr>
 			{% else %}
 				<tr>
-					<td colspan="9">aucun enregistrement dans la base
+					<td colspan="8">aucun enregistrement dans la base
 					</td>
 				</tr>
 			{% endfor %}

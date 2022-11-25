@@ -148,7 +148,7 @@ class SortieController extends AbstractController
             $verouMouvement = $this->checkVerrou($mois,$annee,$repo);
             if($verouMouvement){
                 $this->addFlash('info','Ce mois est déjà verouiller');
-                return $this->redirectToRoute('accueil');
+                return $this->redirectToRoute('accueil'); 
             }
             ////////////
 

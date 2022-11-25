@@ -1,0 +1,344 @@
+
+				<!-- Main Sidebar Container -->
+				<aside
+					class="main-sidebar sidebar-dark-primary elevation-4">
+					<!-- Brand Logo -->
+					<a href="{{url('accueil')}}" class="brand-link">
+						<img src="{{asset('dist/img/billcard_logo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+						<span class="brand-text font-weight-light">BinCard Manager</span>
+					</a>
+
+					<!-- Sidebar -->
+
+					<!-- Sidebar -->
+					<div class="sidebar">
+						{% if app.user %}
+							<!-- Sidebar user panel (optional) -->
+							<div class="user-panel mt-3 pb-3 mb-3 d-flex">
+								<div class="image">
+									<img src="{{asset('dist/img/profilavatar.jpg')}}" class="img-circle elevation-2" alt="User Image">
+								</div>
+								<div title='Déconnectez-vous!' class="info">
+									<a href="{{url('app_logout')}}" class="d-block">
+										{{app.user}}
+										est connecté(e)
+									</a>
+								</div>
+							</div>
+						{% endif %}
+						<!-- SidebarSearch Form -->
+						<div class="form-inline">
+							<div class="input-group" data-widget="sidebar-search">
+								<input class="form-control form-control-sidebar" type="search" placeholder="Entrer la fonctionnalité recherchée." aria-label="Search">
+								<div class="input-group-append">
+									<button class="btn btn-sidebar">
+										<i class="fas fa-search fa-fw"></i>
+									</button>
+								</div>
+							</div>
+						</div>
+
+						<!-- Sidebar Menu -->
+						<nav class="mt-2">
+							<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
+								{#% if is_granted('ROLE_ADMIN') %#}
+								<!-- Add icons to the links using the .nav-icon class																																																																               with font-awesome or any other icon font library -->
+									<li class="nav-item menu-close"> <a title="Parametrez l'application" href="#" class="nav-link active">
+										<i class="nav-icon fas fa-cubes"></i>
+										<p>
+											Produits
+											<i class="right fas fa-angle-left"></i>
+										</p>
+									</a>
+									<ul class="nav nav-treeview">
+										<li class="nav-item">
+											<a href="{{url('app_register')}}" class="nav-link ">
+												<i class="fa fa-user-plus nav-icon"></i>
+												<p>
+													Stock Alerte
+												</p>
+											</a>
+										</li>
+										<li class="nav-item">
+											<a href="{{url('user_index')}}" class="nav-link ">
+												<i class="fa fa-users nav-icon"></i>
+												<p>
+													Nouvel Audit
+												</p>
+											</a>
+										</li>
+										<li class="nav-item">
+											<a href="{{url('controle_index')}}" class="nav-link ">
+												<i class="fab fa-yelp nav-icon"></i>
+												<p>Visualiser audits
+												</p>
+											</a>
+										</li>
+										<li class="nav-item">
+											<a href="" class="nav-link">
+												<i class="fas fa-paper-plane nav-icon"></i>
+												<p>Produits tous sites</p>
+											</a>
+										</li>
+										<li class="nav-item">
+											<a href="{{url('produit_site_index')}}" class="nav-link">
+												<i class="fab fa-linux nav-icon"></i>
+												<p>Produits locaux</p>
+											</a>
+										</li>
+										<li class="nav-item">
+											<a href="{{url('produit_index')}}" class="nav-link">
+												<i class="far fa-circle nav-icon"></i>
+												<p>Tous les produits
+												</p>
+											</a>
+										</li>
+									</ul>
+								</li>
+								<li class="nav-item menu-open">
+									<a href="#" class="nav-link active">
+										<i class="nav-icon fas fa-tachometer-alt"></i>
+										<p>
+											Entrées
+											<i class="right fas fa-angle-left"></i>
+										</p>
+									</a>
+									<ul class="nav nav-treeview">
+										<li class="nav-item">
+											<a href="{{url('entree_index')}}" class="nav-link ">
+												<i class="far fa-user nav-icon"></i>
+												<p>Entrées founisseurs
+												</p>
+											</a>
+										</li>
+										<li class="nav-item">
+											<a href="{{url('transfert_index')}}" class="nav-link ">
+												<i class="far fa-user nav-icon"></i>
+												<p>Entrées reuses
+												</p>
+											</a>
+										</li>
+
+									</ul>
+								</li>
+								<li class="nav-item menu-open">
+									<a href="#" class="nav-link active">
+										<i class="nav-icon fas fa-tachometer-alt"></i>
+										<p>
+											Sorties
+											<i class="right fas fa-angle-left"></i>
+										</p>
+									</a>
+									<ul class="nav nav-treeview">
+										<li class="nav-item">
+											<a title="Transferts vers les clients" href="{{url('transfert_index')}}" class="nav-link ">
+												<i class="far fa-user nav-icon"></i>
+												<p>Damages
+												</p>
+											</a>
+										</li>
+										<li class="nav-item">
+											<a href="{{url('sortie_index')}}" class="nav-link ">
+												<i class="far fa-user nav-icon"></i>
+												<p>Sorties spéciales
+												</p>
+											</a>
+										</li>
+
+									</ul>
+								</li>
+								<li class="nav-item menu-open">
+									<a href="#" class="nav-link active">
+										<i class="nav-icon fas fa-tachometer-alt"></i>
+										<p>
+											Transferts
+											<i class="right fas fa-angle-left"></i>
+										</p>
+									</a>
+									<ul class="nav nav-treeview">
+										<li class="nav-item">
+											<a title="Transferts vers les clients" href="{{url('transfert_index')}}" class="nav-link ">
+												<i class="far fa-user nav-icon"></i>
+												<p>Nouveau Transferts
+												</p>
+											</a>
+										</li>
+										<li class="nav-item">
+											<a href="{{url('sortie_index')}}" class="nav-link ">
+												<i class="far fa-user nav-icon"></i>
+												<p>Transfert émis
+												</p>
+											</a>
+										</li>
+										<li class="nav-item">
+											<a href="{#{url('creation_damage_sortie')}#}" class="nav-link ">
+												<i class="far fa-user nav-icon"></i>
+												<p>Transferts non vallidés
+												</p>
+											</a>
+										</li>
+									</ul>
+								</li>
+								<li class="nav-item menu-open">
+									<a href="#" class="nav-link active">
+										<i class="nav-icon fas fa-tachometer-alt"></i>
+										<p>
+											Rapports
+											<i class="right fas fa-angle-left"></i>
+										</p>
+									</a>
+									<ul class="nav nav-treeview">
+										<li class="nav-item">
+											<a href="{{url('creation_r_mensuel')}}" class="nav-link ">
+												<i class="far fa-user nav-icon"></i>
+												<p>Mensuels  GGG
+												</p>
+											</a>
+										</li>
+										<li class="nav-item">
+											<a href="{{url('transfert_index')}}" class="nav-link ">
+												<i class="far fa-user nav-icon"></i>
+												<p>Annuel
+												</p>
+											</a>
+										</li>
+
+									</ul>
+								</li>
+								<li class="nav-item menu-close">
+									<a title="Parametrez l'application" href="#" class="nav-link active">
+										<i class="nav-icon fas fa-cubes"></i>
+										<p>
+											Configurations
+											<i class="right fas fa-angle-left"></i>
+										</p>
+									</a>
+									<ul class="nav nav-treeview">
+										<li class="nav-item">
+											<a href="{{url('app_register')}}" class="nav-link ">
+												<i class="fa fa-user-plus nav-icon"></i>
+												<p>
+													Nouvel Utilisateurs</p>
+											</a>
+										</li>
+										<li class="nav-item">
+											<a href="{{url('user_index')}}" class="nav-link ">
+												<i class="fa fa-users nav-icon"></i>
+												<p>
+													Liste Utilisateurs</p>
+											</a>
+										</li>
+										<li class="nav-item">
+											<a href="{{url('produit_new')}}" class="nav-link ">
+												<i class="fab fa-yelp nav-icon"></i>
+												<p>Produits</p>
+											</a>
+										</li>
+										<li class="nav-item">
+											<a href="{{url('client_new')}}" class="nav-link">
+												<i class="fas fa-paper-plane nav-icon"></i>
+												<p>Clients</p>
+											</a>
+										</li>
+										<li class="nav-item">
+											<a href="{{url('fournisseur_new')}}" class="nav-link">
+												<i class="fab fa-linux nav-icon"></i>
+												<p>Fournisseur</p>
+											</a>
+										</li>
+										<li class="nav-item">
+											<a href="{{url('site_new')}}" class="nav-link">
+												<i class="far fa-circle nav-icon"></i>
+												<p>Sites</p>
+											</a>
+										</li>
+										<li class="nav-item">
+											<a href="{{url('ville_new')}}" class="nav-link">
+												<i class="fab fa-modx nav-icon"></i>
+												<p>Villes</p>
+											</a>
+										</li>
+									</ul>
+								</li>
+								{#% endif %#}
+
+								<li class="nav-item">
+									<a href="{{url('site_index')}}" class="nav-link">
+										<i class="nav-icon fas fa-th"></i>
+										<p>
+											Liste des sites
+											<span class="right badge badge-danger">New</span>
+										</p>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a href="{{url('ville_index')}}" class="nav-link">
+										<i class="nav-icon fas fa-th"></i>
+										<p>
+											Liste des villes
+											<span class="right badge badge-danger">New</span>
+										</p>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a href="{{url('fournisseur_index')}}" class="nav-link">
+										<i class="nav-icon fas fa-th"></i>
+										<p>
+											Liste des fournisseurs
+											<span class="right badge badge-danger">New</span>
+										</p>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a href="{{url('client_index')}}" class="nav-link">
+										<i class="nav-icon fas fa-th"></i>
+										<p>
+											Liste des clients
+											<span class="right badge badge-danger">New</span>
+										</p>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a href="{{url('site_index')}}" class="nav-link">
+										<i class="nav-icon fas fa-th"></i>
+										<p>
+											Liste des warehouses
+											<span class="right badge badge-danger">New</span>
+										</p>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a href="{{url('produit_index')}}" class="nav-link">
+										<i class="nav-icon fas fa-th"></i>
+										<p>
+											Liste des produits
+											<span class="right badge badge-danger">New</span>
+										</p>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a href="{{url('user_index')}}" class="nav-link">
+										<i class="nav-icon fas fa-th"></i>
+										<p>
+											Utilisateurs actifs
+											<span class="right badge badge-danger">New</span>
+										</p>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a href="{{url('user_index')}}" class="nav-link">
+										<i class="nav-icon fas fa-th"></i>
+										<p>
+											Liste des utilisateurs
+											<span class="right badge badge-danger">New</span>
+										</p>
+									</a>
+								</li>
+							</ul>
+						</nav>
+						<!-- /.sidebar-menu -->
+					</div>
+					<!-- /.sidebar -->
+					<!-- /.sidebar -->
+				</aside>

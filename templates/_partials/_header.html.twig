@@ -1,0 +1,305 @@
+<nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
+					<div class="container">
+						<a href="{{path('accueil')}}" class="navbar-brand">
+							<img src="{{asset('dist/img/billcard_logo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+							<span class="brand-text font-weight-light">BinCard Manager</span>
+						</a>
+
+						<button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+							<span class="navbar-toggler-icon"></span>
+						</button>
+
+						<div class="collapse navbar-collapse order-3" id="navbarCollapse">
+							<!-- Left navbar links -->
+							<!-- Left navbar links -->
+								<ul class="navbar-nav"> <li class="nav-item">
+									<a class="nav-link" data-widget="pushmenu" href="#" role="button">
+										<i class="fas fa-bars"></i>
+									</a>
+								</li>
+								<li class="nav-item d-none d-sm-inline-block">
+									<a href="{{url('search_billcard')}}" class="nav-link">Recherche</a>
+								</li>
+								<li class="nav-item dropdown no-arrow d-none d-sm-inline-block">
+									<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										<span>Produits</span>
+									</a>
+									<!-- Dropdown - User Information -->
+									<div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+										<a title="Pensez à rapprovisionner le stock" class="dropdown-item" href="{{url('produit_site_alerte_index')}}">
+											<i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+											Produits en alertes stock
+										</a>
+										<div class="dropdown-divider"></div>
+
+										{#% if is_granted('ROLE_AUDITEUR')%#}
+										<a title="Pensez à rapprovisionner le stock" class="dropdown-item" href="{{url('controle_new')}}">
+											<i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+											Contrôle d'audit
+										</a>
+										<div class="dropdown-divider"></div>
+										{#% endif %#}
+
+										<a title="Pensez à rapprovisionner le stock" class="dropdown-item" href="{{url('controle_index')}}">
+											<i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+											Liste d'audit
+										</a>
+
+										<a title="Voir sur les autres sites " class="dropdown-item" href="{{url('produit_autre_site')}}">
+											<i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+											Produit autres sites
+										</a>
+										<a class="dropdown-item" href="{{url('produit_site_index')}}">
+											<i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+											Produits
+											{% if app.user %}
+												{% if app.user.siteActif %}
+													{{app.user.siteActif.designation}}
+												{% endif %}
+											{% endif %}
+										</a>
+										<a class="dropdown-item" href="{{url('produit_index')}}">
+											<i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+											Toutes les produits
+										</a>
+									</div>
+								</li>
+								<li class="nav-item dropdown no-arrow d-none d-sm-inline-block">
+									<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										<span>Entrées</span>
+									</a>
+									<!-- Dropdown - User Information -->
+									<div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+
+										{% if app.user %}
+
+											{% if app.user.siteActif %}
+												{% if app.user.siteActif.isWarehouse %}
+													<a class="dropdown-item" href="{{url('creation_entree')}}">
+														<i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+														Nouvelle entrée fournisseur
+													</a>
+													<div class="dropdown-divider"></div>
+												{% endif %}
+											{% endif %}
+
+										{% endif %}
+
+										<a class="dropdown-item" href="{{url('creation_reuse')}}">
+											<i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+											Nouvelle entrée reuse
+										</a>
+										<div class="dropdown-divider"></div>
+										<a class="dropdown-item" href="{{url('entree_reuse_index')}}">
+											<i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+											Tous les reuses
+										</a>
+										<div class="dropdown-divider"></div>
+										<a class="dropdown-item" href="{{url('entree_index')}}">
+											<i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+											Toutes les entrées
+										</a>
+
+									</div>
+								</li>
+								<li class="nav-item dropdown no-arrow d-none d-sm-inline-block">
+									<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										<span>Sorties
+										</span>
+									</a>
+									<!-- Dropdown - User Information -->
+									<div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+										{% if app.user %}
+											{% if app.user.siteActif %}
+												{% if not app.user.siteActif.isWarehouse %}
+													<a class="dropdown-item" href="{{url('creation_sortie')}}">
+														<i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+														Nouvelle sortie client
+													</a>
+													<div class="dropdown-divider"></div>
+												{% endif %}
+											{% endif %}
+										{% endif %}
+										<a class="dropdown-item" href="{{url('creation_damage')}}">
+											<i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+											Nouveau damage
+										</a>
+										<a class="dropdown-item" href="{{url('sortie_damage_index')}}">
+											<i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+											Liste des sorties damages
+										</a>
+
+										<div class="dropdown-divider"></div>
+										<a class="dropdown-item" href="{{url('sortie_speciale_index')}}">
+											<i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+											Liste sorties speciales
+										</a>
+										<div class="dropdown-divider"></div>
+										<a class="dropdown-item" href="{{url('sortie_index')}}">
+											<i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+											Liste des sorties clients
+										</a>
+
+									</div>
+								</li>
+								<li class="nav-item dropdown no-arrow d-none d-sm-inline-block">
+									<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										<span>Transferts
+										</span>
+									</a>
+									<!-- Dropdown - User Information -->
+									<div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+										<a class="dropdown-item" href="{{url('creation_transfert')}}">
+											<i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+											Nouveau transfert
+										</a>
+										<div class="dropdown-divider"></div>
+										<a class="dropdown-item" href="{{url('transfert_non_valide')}}">
+											<i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+											Transferts non validés
+											{% if app.user %}
+												{% if app.user.siteActif.validationAttendu > 0 %}
+													<span class=" badge badge-danger ">
+														{{app.user.siteActif.validationAttendu}}
+													</span>
+												{% else %}
+													<span class=" badge badge-success ">
+														{{app.user.siteActif.validationAttendu}}
+													</span>
+												{% endif %}
+											{% endif %}
+										</a>
+										<div class="dropdown-divider"></div>
+										<a class="dropdown-item" href="{{url('transfert_emis_index')}}">
+											<i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+											Transferts émis
+										</a>
+										<a class="dropdown-item" href="{{url('transfert_recu_index')}}">
+											<i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+											Transferts récus
+										</a>
+										<div class="dropdown-divider"></div>
+										<a class="dropdown-item" href="{{url('transfert_index')}}">
+											<i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+											Tous les transferts
+										</a>
+									</div>
+
+								</li>
+								<li class="nav-item dropdown no-arrow d-none d-sm-inline-block">
+									<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										<span>Rapports</span>
+									</a>
+									<!-- Dropdown - User Information -->
+									<div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+										<a title="" class="dropdown-item" href="{{url('creation_r_mensuel')}}">
+											<i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+											Chercher rapport mensuel
+										</a>
+										<div class="dropdown-divider"></div>
+										<a title="" class="dropdown-item" href="{{url('r_mensuel_site_index')}}">
+											<i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+											Tous les rapports mensuel
+										</a>
+										<div class="dropdown-divider"></div>
+										<a title="" class="dropdown-item bg-warning " href="{{url('rapport_annuel_site_new')}}">
+											<i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+											Créer rapport annuel
+										</a>
+										<div class="dropdown-divider"></div>
+										<a title="" class="dropdown-item" href="{{url('rapport_annuel_site_index')}}">
+											<i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+											Tous les rapports Annuel
+										</a>
+										<div class="dropdown-divider"></div>
+										<a title="" class="dropdown-item" href="{{url('r_annuel_general_new')}}">
+											<i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+											Créer rapport general
+										</a>
+										<div class="dropdown-divider"></div>
+										<a title="" class="dropdown-item" href="{{url('r_annuel_general_index')}}">
+											<i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+											Lire tous les rapports généraux
+										</a>
+
+									</div>
+								</li>
+
+							</ul>
+
+							<!-- SEARCH FORM -->
+							{# <form class="form-inline ml-0 ml-md-3"> #}
+							{# <form class="form-inline" action="{{url('serachByPN')}}">
+								<div class="input-group input-group-sm">
+									<input name='pn' class="form-control form-control-navbar" type="search" placeholder="Entrer le product number recherché et appuyez sur entrer." aria-label="Search">
+									<div class="input-group-append">
+										<button class="btn btn-navbar" type="submit">
+											<i title="Entrer le product number recherché et appuyez sur entrer" class="fas fa-search"></i>
+										</button>
+										<button class="btn btn-navbar" type="button" data-widget="navbar-search">
+											<i class="fas fa-times"></i>
+										</button>
+									</div>
+								</div>
+							</form> #}
+						</div>
+
+						<!-- Right navbar links -->
+						<ul	class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
+						<!-- Notifications Dropdown Menu -->
+						<li class="nav-item dropdown">
+							<a title="Entrées en attentes de validations" class="nav-link" href="{{url('transfert_non_valide')}}">
+								<i class="far fa-bell"></i>
+								{% if app.user %}
+									{% if app.user.siteActif %}
+										<span class="badge badge-warning navbar-badge">
+											{{ app.user.siteActif.validationAttendu}}
+										</span>
+
+									{% endif %}
+								{% endif %}
+							</a>
+						</li>
+						{% if app.user %}
+							<!-- Nav Item - User Information -->
+							<li class="nav-item dropdown no-arrow">
+								<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									<span class="mr-2 d-none d-lg-inline text-gray-600 small">
+										Bjr
+										{{ app.user.nom|title }}</span>
+									<img class="img-profile rounded-circle" src="{{asset('dist/img/profilavatar2.jpg')}}" heigth="100%">
+								</a>
+								<!-- Dropdown - User Information -->
+								<div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+									<a class="dropdown-item" href="{{ path('profile', {'id': app.user.id}) }}">
+										<i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+										Voir le profile
+									</a>
+									<a class="dropdown-item" href="#">
+										<i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+										role dans le systeme
+									</a>
+									<div class="dropdown-divider"></div>
+									<a class="dropdown-item" href="{{url('choix_site')}}">
+										<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+										Changer de site actif
+									</a>
+									<div class="dropdown-divider"></div>
+									{% if is_granted('ROLE_ADMIN') %}
+										<a class="dropdown-item" href="{{url('admin')}}">
+											<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+											Administration
+										</a>
+									{% endif %}
+									<div class="dropdown-divider"></div>
+									<a class="dropdown-item" href="{{url('app_logout')}}">
+										<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+										Déconnexion
+									</a>
+								</div>
+							</li>
+						{% endif %}
+
+						</ul>
+					</div>
+				</nav>
