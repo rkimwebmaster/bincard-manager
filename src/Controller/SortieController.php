@@ -13,12 +13,13 @@ use App\Repository\ProduitSiteRepository;
 use App\Repository\SortieRepository;
 use App\Repository\ClientRepository;
 use App\Repository\RMensuelSiteRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 /**
  *@IsGranted("IS_AUTHENTICATED_FULLY")
@@ -142,13 +143,13 @@ class SortieController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             //verifier que ce mois n'est pas verrouiller 
-            $date=$sortie->getDate();
+            $date = $sortie->getDate();
             $mois = $date->format('m');
             $annee = $date->format('Y');
-            $verouMouvement = $this->checkVerrou($mois,$annee,$repo);
-            if($verouMouvement){
-                $this->addFlash('info','Ce mois est déjà verouiller');
-                return $this->redirectToRoute('accueil'); 
+            $verouMouvement = $this->checkVerrou($mois, $annee, $repo);
+            if ($verouMouvement) {
+                $this->addFlash('info', 'Ce mois est déjà verouiller');
+                return $this->redirectToRoute('accueil');
             }
             ////////////
 
@@ -226,43 +227,64 @@ class SortieController extends AbstractController
     /**
      * @Route("/{id}/edit", name="sortie_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Sortie $sortie): Response
+    public function edit(Request $request, Sortie $sortie, SessionInterface $session): Response
     {
-        $form = $this->createForm(SortieType::class, $sortie, [
-            'action' => $this->generateUrl('sortie_new', ['id' => $sortie->getClient()->getId()]),
-            'method' => 'POST',
-        ]);
+
+        $form = $this->createForm(SortieType::class, $sortie, []);
         $form->handleRequest($request);
 
+        if ($session->has('oldLigneSorties')) {
+            $oldLigneSorties = $session->get('oldLigneSorties');
+        } else {
+            $oldLigneSorties = new ArrayCollection();
+            foreach ($sortie->getLigneSorties() as $ligne) {
+                $oldLigneSorties->add($ligne);
+            }
+            $session->set('oldLigneSorties', $oldLigneSorties);
+        }
+
         if ($form->isSubmitted() && $form->isValid()) {
+            // dd($oldLigneSorties);
+
+            ////debut modification //////
+            $entityManager = $this->getDoctrine()->getManager();
+            //mettre a jour le produit site 
+            $ligneSorties = $sortie->getLigneSorties();
+            foreach ($ligneSorties as $ligneSortie) {
+                ////imbriquer la boucle des oldlignesortie 
+                foreach ($oldLigneSorties as $oldLigneSortie) {
+                    $produitSite = $ligneSortie->getProduitSite();
+                    $produit = $produitSite->getProduit();
+                    $quantiteProduitSite =  $produitSite->getQuantite();
+                    $quantiteSortie = $ligneSortie->getQuantite();
+                    if ($ligneSortie->getProduitSite()->getId() == $oldLigneSortie->getProduitSite()->getId()) {
+                        dd("meme produit deux fois ".$ligneSortie->getProduitSite());
+                        $produitSite->setQuantite($quantiteProduitSite + $quantiteSortie);
+                        $produit->setQuantite($produit->getQuantite() + $quantiteSortie);
+                    }
+
+                }
+                
+                if ($quantiteProduitSite < $quantiteSortie) {
+                    $this->addFlash('warning', 'La quantité du produit ' . $produitSite . ' est inférieur à la sortie.');
+
+                    return $this->redirectToRoute('sortie_index');
+                }
+                $produitSite->setQuantite($quantiteProduitSite - $quantiteSortie);
+                $produit->setQuantite($produit->getQuantite() - $quantiteSortie);
+
+                $entityManager->persist($produit);
+                $entityManager->persist($produitSite);
+            }
+
+
+            ///fin 
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('sortie_index');
         }
         ///
-        $entityManager = $this->getDoctrine()->getManager();
-        //mettre a jour le produit site 
-        $ligneSorties = $sortie->getLigneSorties();
-        foreach ($ligneSorties as $ligneSortie) {
-            $produitSite = $ligneSortie->getProduitSite();
-            $produit = $produitSite->getProduit();
-            $quantiteProduitSite =  $produitSite->getQuantite();
-            $quantiteSortie = $ligneSortie->getQuantite();
-            if ($quantiteProduitSite < $quantiteSortie) {
-                $this->addFlash('warning', 'La quantité du produit ' . $produitSite . ' est inférieur à la sortie.');
-
-                return $this->redirectToRoute('sortie_index');
-            }
-            $produitSite->setQuantite($quantiteProduitSite + $quantiteSortie);
-            $produit->setQuantite($produit->getQuantite() + $quantiteSortie);
-
-            $entityManager->persist($produit);
-            $entityManager->persist($produitSite);
-        }
-        $entityManager->remove($sortie);
-        $entityManager->flush();
-        $this->addFlash('warning', 'la sortie a été temporairement supprimé. Veuillez confirmer après modification pour rétablissement ');
-
+        // $entityManager->flush();
 
         return $this->render('sortie/edit.html.twig', [
             'sortie' => $sortie,
@@ -303,14 +325,15 @@ class SortieController extends AbstractController
         return $this->redirectToRoute('sortie_index');
     }
 
-    
-    public function checkVerrou(int $mois, int $annee, RMensuelSiteRepository $rMensuelSiteRepository){
-        $checkRapport=$rMensuelSiteRepository->findBy(['mois'=>$mois,'annee'=>$annee,'isCloture'=>true]);
-        if($checkRapport){
-            $this->addFlash('warning','Ce mois est déjà cloturé. Vous ne pouvez effectuer des entrées.');
+
+    public function checkVerrou(int $mois, int $annee, RMensuelSiteRepository $rMensuelSiteRepository)
+    {
+        $checkRapport = $rMensuelSiteRepository->findBy(['mois' => $mois, 'annee' => $annee, 'isCloture' => true]);
+        if ($checkRapport) {
+            $this->addFlash('warning', 'Ce mois est déjà cloturé. Vous ne pouvez effectuer des entrées.');
+            ///la route ci-dessous est a verifier 
             return $this->redirectToRoute('entree_index');
         }
-        return ;
-
+        return;
     }
 }

@@ -307,62 +307,7 @@ class EntreeController extends AbstractController
                 return $this->redirectToRoute('entree_index');
             }
             //fin ckeck doublon 
-            if (!$session->has('oldLigneEntrees')) {
-                $this->addFlash('warning', 'L\'ancienne valeur est non stockée.');
-            } else {
-                $oldLigneEntrees = $session->get('oldLigneEntrees');
-                //// mise a jour des produits site et general 
-                foreach ($ligneEntrees as $ligne) {
-                    $quantite = $ligne->getQuantite();
-                    $proligne = $ligne->getProduit();
-                    //verifier si le produit qui entre est déjà dans le site actuel 
-                    $checkProduitSite = $this->getDoctrine()->getRepository(ProduitSite::class)->findOneBy(['site' => $siteActif, 'produit' => $proligne]);
-                    if ($checkProduitSite) {
-                        $produit = $checkProduitSite->getProduit();
-                        ///verifier si le produit figurer sur l'ancienne objet et faire les calculs y afferent 
-                        // sinon faire les calculs sans en tenir compte 
-                        foreach ($oldLigneEntrees as $ligneEntree) {
-                            $produitSiteOld = $ligneEntree->getProduitSite();
-                            $produitOld = $ligneEntree->getProduit();
-                            $quantiteOld = $ligneEntree->getQuantite();
-                            if ($produitOld == $produit) {
-                                $checkProduitSite->setQuantite($checkProduitSite->getQuantite() - $quantiteOld);
-                                $produit->setQuantite($produit->getQuantite() - $quantiteOld);
-                            }
-                        }
-                        $checkProduitSite->setQuantite($checkProduitSite->getQuantite() + $quantite );
-                        $produit->setQuantite($produit->getQuantite() + $quantite);  
-
-
-                        $ligne->setProduitSite($checkProduitSite);
-                        $ligne->updateLigneBillcard();
-                        $entree->addLigneEntree($ligne);
-
-                        // $entityManager->persist($produit);
-                        // $entityManager->persist($checkProduitSite);
-                        // $entityManager->persist($ligne->getLigneBillcard());
-                    } else {
-                        $produitSite = new ProduitSite();
-                        $produitSite->setQuantite($quantite);
-                        $produitSite->setSite($siteActif);
-                        $produit = $ligne->getProduit();
-                        $produit->setQuantite($produit->getQuantite() + $quantite);
-                        $produitSite->setProduit($produit);
-                        if ($siteActif->getIsWarehouse()) {
-                            $produitSite->setIsProduitDepot(true);
-                        }
-                        $ligne->setProduitSite($produitSite);
-                        $ligne->updateLigneBillcard();
-                        $entree->addLigneEntree($ligne);
-
-                        $entityManager->persist($produit);
-                        // $entityManager->persist($ligne->getLigneBillcard());
-                    }
-                }
-                //// fin update des quantite produits 
-                $session->remove('oldLigneEntrees');
-            }
-            // dd('en dehors  ');
+            
 
             $entityManager->persist($entree);
             $entityManager->flush();
