@@ -258,7 +258,7 @@ class SortieController extends AbstractController
                     $quantiteProduitSite =  $produitSite->getQuantite();
                     $quantiteSortie = $ligneSortie->getQuantite();
                     if ($ligneSortie->getProduitSite()->getId() == $oldLigneSortie->getProduitSite()->getId()) {
-                        dd("meme produit deux fois ".$ligneSortie->getProduitSite());
+                        // dd("meme produit deux fois ".$ligneSortie->getProduitSite());
                         $produitSite->setQuantite($quantiteProduitSite + $quantiteSortie);
                         $produit->setQuantite($produit->getQuantite() + $quantiteSortie);
                     }
