@@ -54,6 +54,37 @@ class LigneSortie
     }
 
     /**
+     * @ORM\PreRemove
+     */
+    public function beforeDeletion()
+    {
+        $produitSite = $this->getProduitSite();
+        $produit = $produitSite->getProduit();
+        $quantiteProduitSite =  $produitSite->getQuantite();
+        $quantiteSortie = $this->getQuantite();
+        //les deux instructions ci-dessous deplacé au nibniveau des entités 
+        $produitSite->setQuantite($quantiteProduitSite + $quantiteSortie);
+        $produit->setQuantite($produit->getQuantite() + $quantiteSortie);
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function beforeCreation()
+    {
+
+        dd("creation");
+        $produitSite = $this->getProduitSite();
+        $produit = $produitSite->getProduit();
+        $quantiteProduitSite =  $produitSite->getQuantite();
+        $quantiteSortie = $this->getQuantite();
+        //les deux instructions ci-dessous deplacé au nibniveau des entités 
+        $produitSite->setQuantite($quantiteProduitSite - $quantiteSortie);
+        $produit->setQuantite($produit->getQuantite() - $quantiteSortie);
+    }
+
+
+    /**
      * @ORM\PrePersist
      */
     public function updateLigneBincard()

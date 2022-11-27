@@ -193,8 +193,8 @@ class SortieController extends AbstractController
 
                     return $this->redirectToRoute('sortie_index');
                 }
-                $produitSite->setQuantite($quantiteProduit - $quantiteSortie);
-                $produit->setQuantite($produit->getQuantite() - $quantiteSortie);
+                // $produitSite->setQuantite($quantiteProduit - $quantiteSortie);
+                // $produit->setQuantite($produit->getQuantite() - $quantiteSortie);
 
                 $entityManager->persist($produit);
                 $entityManager->persist($produitSite);
@@ -244,42 +244,71 @@ class SortieController extends AbstractController
         }
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+
+            $client=$sortie->getClient();
+            $user=$sortie->getUser();
+            $siteEnvoie=$sortie->getSiteEnvoie();
+            $date=$sortie->getDate();
+            $iddNumber=$sortie->getIddNumber();
+            $machineNumber=$sortie->getMachineNumber();
+            $isDamage=$sortie->getIsDamage();
+            $code=$sortie->getCode();
+            $ligneSorties = $sortie->getLigneSorties();
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($sortie);
+
+            $nouvelleSortie=new Sortie();
+            $nouvelleSortie->setClient($client)->setUser($user)->setSiteEnvoie($siteEnvoie)
+            ->setDate($date)->setIddNumber($iddNumber)->setMachineNumber($machineNumber)
+            ->setIsDamage($isDamage)->setCode($code);
+            foreach ($ligneSorties as $ligneSortie) {
+            $nouvelleSortie->addLigneSorty($ligneSortie);
+            }
+            $entityManager->persist($nouvelleSortie);
+
+
+
             // dd($oldLigneSorties);
 
             ////debut modification //////
-            $entityManager = $this->getDoctrine()->getManager();
-            //mettre a jour le produit site 
-            $ligneSorties = $sortie->getLigneSorties();
-            foreach ($ligneSorties as $ligneSortie) {
-                ////imbriquer la boucle des oldlignesortie 
-                foreach ($oldLigneSorties as $oldLigneSortie) {
-                    $produitSite = $ligneSortie->getProduitSite();
-                    $produit = $produitSite->getProduit();
-                    $quantiteProduitSite =  $produitSite->getQuantite();
-                    $quantiteSortie = $ligneSortie->getQuantite();
-                    if ($ligneSortie->getProduitSite()->getId() == $oldLigneSortie->getProduitSite()->getId()) {
-                        // dd("meme produit deux fois ".$ligneSortie->getProduitSite());
-                        $produitSite->setQuantite($quantiteProduitSite + $quantiteSortie);
-                        $produit->setQuantite($produit->getQuantite() + $quantiteSortie);
-                    }
 
-                }
+
+
+            // foreach ($oldLigneSorties as $oldLigneSortie) {
                 
-                if ($quantiteProduitSite < $quantiteSortie) {
-                    $this->addFlash('warning', 'La quantité du produit ' . $produitSite . ' est inférieur à la sortie.');
+            //     $entityManager->remove($oldLigneSortie);
+            //     // $entityManager->
+            // }
+            // //mettre a jour le produit site 
+            // foreach ($ligneSorties as $ligneSortie) {
+            //     ////imbriquer la boucle des oldlignesortie 
+            //     $produitSite = $ligneSortie->getProduitSite();
+            //     $produit = $produitSite->getProduit();
+            //     $quantiteProduitSite =  $produitSite->getQuantite();
+            //     $quantiteSortie = $ligneSortie->getQuantite();
+            //     if ($ligneSortie->getProduitSite()->getId() == $oldLigneSortie->getProduitSite()->getId()) {
+            //         // dd("meme produit deux fois ".$ligneSortie->getProduitSite());
+            //         $produitSite->setQuantite($quantiteProduitSite - $quantiteSortie);
+            //         $produit->setQuantite($produit->getQuantite() - $quantiteSortie);
+            //     }
+                
+            //     if ($quantiteProduitSite < $quantiteSortie) {
+            //         $this->addFlash('warning', 'La quantité du produit ' . $produitSite . ' est inférieur à la sortie.');
 
-                    return $this->redirectToRoute('sortie_index');
-                }
-                $produitSite->setQuantite($quantiteProduitSite - $quantiteSortie);
-                $produit->setQuantite($produit->getQuantite() - $quantiteSortie);
-
-                $entityManager->persist($produit);
-                $entityManager->persist($produitSite);
-            }
+            //         return $this->redirectToRoute('sortie_index');
+            //     }
+            //     // $produitSite->setQuantite($quantiteProduitSite - $quantiteSortie);
+            //     // $produit->setQuantite($produit->getQuantite() - $quantiteSortie);
+                
+            // }
 
 
             ///fin 
-            $this->getDoctrine()->getManager()->flush();
+            $entityManager->flush();
+
+            // $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('sortie_index');
         }
@@ -311,8 +340,10 @@ class SortieController extends AbstractController
 
                     return $this->redirectToRoute('sortie_index');
                 }
-                $produitSite->setQuantite($quantiteProduitSite + $quantiteSortie);
-                $produit->setQuantite($produit->getQuantite() + $quantiteSortie);
+
+                //les deux instructions ci-dessous deplacé au nibniveau des entités 
+                // $produitSite->setQuantite($quantiteProduitSite + $quantiteSortie);
+                // $produit->setQuantite($produit->getQuantite() + $quantiteSortie);
 
                 $entityManager->persist($produit);
                 $entityManager->persist($produitSite);
